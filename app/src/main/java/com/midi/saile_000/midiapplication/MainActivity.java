@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
         if (myMidiReceiver == null)
         {
+            //Midi Receiver initialisieren
             myMidiReceiver = new MidiReceiver();
         }
 
