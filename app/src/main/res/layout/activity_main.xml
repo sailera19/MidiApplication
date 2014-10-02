@@ -8,33 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.midi.saile_000.midiapplication.MainActivity">
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Device"
-        android:id="@+id/getDeviceButton"
-        android:layout_below="@+id/deviceNumber"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Device List"
-        android:layout_marginTop="38dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/getDeviceListButton" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/deviceNumber"
-        android:inputType="number"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    tools:context="com.midi.saile_000.midiapplication.MainActivity"
+    android:id="@+id/">
 
     <EditText
         android:layout_width="wrap_content"
@@ -42,30 +17,11 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/programNumber"
-        android:layout_toEndOf="@+id/getDeviceButton"
-        android:layout_below="@+id/getDeviceButton"
-        android:layout_alignLeft="@+id/getDeviceButton"
-        android:layout_alignStart="@+id/getDeviceButton"
-        android:layout_alignRight="@+id/deviceList"
-        android:layout_alignEnd="@+id/deviceList" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send Note"
-        android:id="@+id/sendNoteButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Device List"
-        android:id="@+id/deviceList"
-        android:layout_above="@+id/deviceNumber"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/sendMessageButton"
+        android:layout_alignStart="@+id/sendMessageButton"
+        android:layout_alignRight="@+id/sendMessageButton"
+        android:layout_alignEnd="@+id/sendMessageButton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -73,7 +29,27 @@
         android:layout_height="wrap_content"
         android:text="send Message"
         android:id="@+id/sendMessageButton"
+        android:layout_marginTop="59dp"
         android:layout_below="@+id/programNumber"
+        android:layout_centerHorizontal="true" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/getDeviceButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:textOff="get device"
+        android:textOn="device set" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/myText"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

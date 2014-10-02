@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.lang.reflect.Array;
 
@@ -37,57 +38,25 @@ public class MainActivity extends Activity {
         MidiSystem.initialize(this);
         try {
 
-            Button getDeviceListButton = (Button) findViewById(R.id.getDeviceListButton);
-
-            Button getDeviceButton = (Button) findViewById(R.id.getDeviceButton);
-
-            Button sendNoteButton = (Button) findViewById(R.id.sendNoteButton);
+            final ToggleButton getDeviceButton = (ToggleButton) findViewById(R.id.getDeviceButton);
 
             Button sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
 
-            final TextView deviceList = (TextView) findViewById(R.id.deviceList);
-
-            final EditText deviceNumber = (EditText) findViewById(R.id.deviceNumber);
-
             final EditText programNumber = (EditText) findViewById(R.id.programNumber);
 
-            getDeviceListButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        getMidiReceiver();
-                        deviceList.setText(MidiReceiver.getDeviceList());
-                    } catch (MidiUnavailableException e) {
-                        deviceList.setText(e.getMessage());
-                    } catch (ArrayIndexOutOfBoundsException e)
-                    {
-                        deviceList.setText(e.getMessage());
-                    }
-
-                }
-            });
+            final TextView myText = (TextView) findViewById(R.id.myText);
 
             getDeviceButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
-                        myMidiReceiver.setMidiDevice(Integer.parseInt(deviceNumber.getText().toString()));
+                        getMidiReceiver();
                     } catch (MidiUnavailableException e) {
-                        deviceList.setText(e.getMessage());
+                        myText.setText(e.getMessage());
                     }
                 }
             });
 
-            sendNoteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        myMidiReceiver.sendNote(36, 64);
-                    } catch (InvalidMidiDataException e) {
-                        deviceList.setText(e.getMessage());
-                    }
-                }
-            });
 
             sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,7 +64,7 @@ public class MainActivity extends Activity {
                     try {
                         myMidiReceiver.kurzweilChangeProgram(Integer.parseInt(programNumber.getText().toString()));
                     } catch (InvalidMidiDataException e) {
-                        deviceList.setText(e.getMessage());
+                        myText.setText(e.getMessage());
                     }
                 }
             });
