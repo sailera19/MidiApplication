@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">MidiApplication</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">E-Pioano Midi-Set-List</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 

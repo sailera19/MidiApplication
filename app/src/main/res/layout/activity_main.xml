@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.midi.saile_000.midiapplication.MainActivity"
-    android:id="@+id/">
+    android:id="@+id/"
+    android:background="#ff48548b">
 
     <EditText
         android:layout_width="wrap_content"
@@ -21,7 +22,8 @@
         android:layout_alignLeft="@+id/sendMessageButton"
         android:layout_alignStart="@+id/sendMessageButton"
         android:layout_alignRight="@+id/sendMessageButton"
-        android:layout_alignEnd="@+id/sendMessageButton" />
+        android:layout_alignEnd="@+id/sendMessageButton"
+        android:background="#fffaffea" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -31,7 +33,8 @@
         android:id="@+id/sendMessageButton"
         android:layout_marginTop="59dp"
         android:layout_below="@+id/programNumber"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#fffaffea" />
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -42,7 +45,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:textOff="get device"
-        android:textOn="device set" />
+        android:textOn="device set"
+        android:background="#fffaffea" />
 
     <TextView
         android:layout_width="wrap_content"
