@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.midi.saile_000.midiapplication.MainActivity"
-    android:id="@+id/"
+    android:id="@+id/activity_main"
     android:background="#ff48548b">
 
     <EditText
@@ -54,6 +54,14 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/myText"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start Library"
+        android:id="@+id/newActivity"
+        android:layout_above="@+id/myText"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

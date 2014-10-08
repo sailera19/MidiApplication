@@ -1,6 +1,7 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MidiSystem.initialize(this);
+
+
         try {
 
             final ToggleButton getDeviceButton = (ToggleButton) findViewById(R.id.getDeviceButton);
@@ -75,12 +77,23 @@ public class MainActivity extends Activity {
         }
         catch (Exception e)
         {
-            final TextView deviceList = (TextView) findViewById(R.id.deviceList);
+            final TextView deviceList = (TextView) findViewById(R.id.myText);
 
             deviceList.setText(e.getMessage());
         }
 
         ;
+
+        Button newActivity = (Button) findViewById(R.id.newActivity);
+        newActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Library.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
     }
@@ -111,4 +124,5 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

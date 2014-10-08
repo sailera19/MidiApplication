@@ -72,6 +72,12 @@ public class MidiReceiver  {
         sendMessage(myMidiMessage);
     }
 
+    public void changeProgram (MidiProgram midiProgram) throws InvalidMidiDataException {
+        changeBank(midiProgram.bank);
+
+        changeProgram(midiProgram.program);
+    }
+
     public void changeBank (int bank) throws InvalidMidiDataException {
         ShortMessage myMidiMessage = new ShortMessage();
 
