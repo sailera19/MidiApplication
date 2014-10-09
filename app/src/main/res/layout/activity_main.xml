@@ -29,24 +29,30 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send Message"
+        android:text="@string/sendMessageB"
         android:id="@+id/sendMessageButton"
         android:layout_marginTop="59dp"
         android:layout_below="@+id/programNumber"
         android:layout_centerHorizontal="true"
-        android:background="#fffaffea" />
+        android:background="#fffaffea"
+        android:hint="@string/sendMessage" />
 
     <ToggleButton
-        android:layout_width="wrap_content"
+        android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
+        android:text="@string/getDevice"
         android:id="@+id/getDeviceButton"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
-        android:textOff="get device"
+        android:textOff="Get Device"
         android:textOn="device set"
-        android:background="#fffaffea" />
+        android:background="#fffaffea"
+        android:hint="@string/getDeviceButton"
+        android:checked="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:width="@dimen/activity_horizontal_margin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,12 +62,30 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="start Library"
         android:id="@+id/newActivity"
         android:layout_above="@+id/myText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#fffaffea" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/textIntro"
+        android:id="@+id/textViewIntro"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center|top"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#e5f1f9d5"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

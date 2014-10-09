@@ -10,5 +10,9 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-
+    <string name="textIntro">Herzlich Willkommen</string>
+    <string name="getDeviceButton">get device</string>
+    <string name="sendMessage">send Message</string>
+    <string name="sendMessageB">send Message</string>
+    <string name="getDevice">New ToggleButton</string>
 </resources>
