@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,9 +50,9 @@ public class Library extends Activity {
 
             myMidiProgramList.add(new MidiProgram(1, 1, 0, "Piano"));
 
-            myMidiProgramList.add(new MidiProgram(2, 1, 0, "blabla"));
+            myMidiProgramList.add(new MidiProgram(2, 2, 0, "blabla"));
 
-            myMidiProgramList.add(new MidiProgram(3, 1, 0, "blubba"));
+            myMidiProgramList.add(new MidiProgram(3, 3, 0, "blubba"));
 
 
             myAdapter.updateDataSet(myMidiProgramList);
