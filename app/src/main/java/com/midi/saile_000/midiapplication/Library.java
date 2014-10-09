@@ -48,11 +48,11 @@ public class Library extends Activity {
 
             final List<MidiProgram> myMidiProgramList = new LinkedList<MidiProgram>();
 
-            myMidiProgramList.add(new MidiProgram(1, 1, 0, "Piano"));
+            myMidiProgramList.add(new MidiProgram(1, 0, 0, 1, "Piano"));
 
-            myMidiProgramList.add(new MidiProgram(2, 2, 0, "blabla"));
+            myMidiProgramList.add(new MidiProgram(2, 0, 0, 2, "blabla"));
 
-            myMidiProgramList.add(new MidiProgram(3, 3, 0, "blubba"));
+            myMidiProgramList.add(new MidiProgram(3, 0, 0, 3, "blubba"));
 
 
             myAdapter.updateDataSet(myMidiProgramList);
