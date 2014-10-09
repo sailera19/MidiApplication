@@ -12,10 +12,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -52,13 +58,6 @@ public class Library extends Activity {
 
             final List<MidiProgram> myMidiProgramList = new LinkedList<MidiProgram>();
 
-            myMidiProgramList.add(new MidiProgram(0, -1, 1, 1, "Piano"));
-
-            myMidiProgramList.add(new MidiProgram(0, -1, 2, 2, "blabla"));
-
-            myMidiProgramList.add(new MidiProgram(0, -1, 3, 3, "blubba"));
-
-
             myAdapter.updateDataSet(myMidiProgramList);
 
             ListView myListView = (ListView) findViewById(R.id.listView);
@@ -83,11 +82,19 @@ public class Library extends Activity {
 
                 }
             });
-            File bla = new File(getFilesDir(), "bla.css");
             try {
-                FileInputStream blaInput = new FileInputStream(bla);
-            } catch (FileNotFoundException e) {
-                System.out.println("ging schief");
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open("pc3k.csv")));
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                    String[] row = line.split(",");
+                    myMidiProgramList.add(new MidiProgram(Integer.parseInt(row[0].trim()), Integer.parseInt(row[1].trim()), Integer.parseInt(row[2].trim()), Integer.parseInt(row[3].trim()), row[4]));
+
+                }
+                myAdapter.updateDataSet(myMidiProgramList);
+                myListView.setAdapter(myAdapter);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 
