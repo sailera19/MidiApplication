@@ -17,13 +17,11 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/programNumber"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/sendMessageButton"
-        android:layout_alignStart="@+id/sendMessageButton"
-        android:layout_alignRight="@+id/sendMessageButton"
-        android:layout_alignEnd="@+id/sendMessageButton"
-        android:background="#fffaffea" />
+        android:id="@+id/PCInput"
+        android:background="#fffaffea"
+        android:layout_below="@+id/PCText"
+        android:layout_alignStart="@+id/MSBInput"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -31,46 +29,26 @@
         android:layout_height="wrap_content"
         android:text="@string/sendMessageB"
         android:id="@+id/sendMessageButton"
-        android:layout_marginTop="59dp"
-        android:layout_below="@+id/programNumber"
+        android:background="#fffaffea"
+        android:hint="@string/sendMessage"
+        android:layout_toEndOf="@+id/LSBInput"
         android:layout_centerHorizontal="true"
-        android:background="#fffaffea"
-        android:hint="@string/sendMessage" />
-
-    <ToggleButton
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="wrap_content"
-        android:text="@string/getDevice"
-        android:id="@+id/getDeviceButton"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="58dp"
-        android:textOff="Get Device"
-        android:textOn="device set"
-        android:background="#fffaffea"
-        android:hint="@string/getDeviceButton"
-        android:checked="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="bold"
-        android:width="@dimen/activity_horizontal_margin" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/myText"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/LSBInput"
+        android:layout_marginTop="30dp" />
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start Library"
-        android:id="@+id/newActivity"
-        android:layout_above="@+id/myText"
-        android:layout_centerHorizontal="true"
-        android:background="#fffaffea" />
+        android:text="Bibliothek starten"
+        android:id="@+id/startLibrary"
+        android:background="#fffaffea"
+        android:layout_toStartOf="@+id/MSBText"
+        android:layout_toEndOf="@+id/MSBText"
+        android:layout_alignParentBottom="false"
+        android:layout_toLeftOf="@+id/sendMessageButton"
+        android:layout_below="@+id/sendMessageButton"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +63,77 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textColor="#e5f1f9d5"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Programm Change"
+        android:id="@+id/PCText"
+        android:textColor="#e5f1f9d5"
+        android:layout_below="@+id/textViewIntro"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="MSB"
+        android:id="@+id/MSBText"
+        android:layout_marginTop="30dp"
+        android:textColor="#e5f1f9d5"
+        android:layout_below="@+id/PCInput"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/MSBInput"
+        android:background="#fffaffea"
+        android:layout_below="@+id/MSBText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="LSB"
+        android:id="@+id/LSBText"
+        android:layout_marginTop="30dp"
+        android:layout_alignEnd="@+id/startLibrary"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/MSBInput"
+        android:textColor="#e5f1f9d5" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/LSBInput"
+        android:background="#fffaffea"
+        android:layout_below="@+id/LSBText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setlist starten"
+        android:id="@+id/startSetlist"
+        android:background="#fffaffea"
+        android:layout_toStartOf="@+id/sendMessageButton"
+        android:layout_toEndOf="@+id/MSBText"
+        android:layout_below="@+id/sendMessageButton"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"
+        android:layout_toRightOf="@+id/sendMessageButton" />
 
 
 </RelativeLayout>

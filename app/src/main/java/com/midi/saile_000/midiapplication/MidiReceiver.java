@@ -72,20 +72,42 @@ public class MidiReceiver  {
         sendMessage(myMidiMessage);
     }
 
-    public void changeProgram (MidiProgram midiProgram) throws InvalidMidiDataException {
-        changeBank(midiProgram.bank);
+    public void change (int msb, int lsb, int program) throws InvalidMidiDataException {
+        if(msb >= 0)
+            changeMSB(msb);
 
-        changeProgram(midiProgram.program);
+        if(lsb >= 0)
+            changeLSB(lsb);
+
+        if(program >= 0)
+            changeProgram(program);
     }
 
-    public void changeBank (int bank) throws InvalidMidiDataException {
+    public void changeProgram (MidiProgram midiProgram) throws InvalidMidiDataException {
+        change( midiProgram.msb, midiProgram.lsb, midiProgram.program);
+    }
+
+    public void changeMSB(int msb) throws InvalidMidiDataException {
         ShortMessage myMidiMessage = new ShortMessage();
 
-        if(bank>127) {
-            bank = 0;
+        if(msb>127) {
+            msb = 0;
         }
 
-        myMidiMessage.setMessage(ShortMessage.CONTROL_CHANGE, 0, 0, bank);
+        myMidiMessage.setMessage(ShortMessage.CONTROL_CHANGE, 0, 0, msb);
+
+        sendMessage(myMidiMessage);
+    }
+
+    public void changeLSB (int lsb) throws InvalidMidiDataException {
+        ShortMessage myMidiMessage = new ShortMessage();
+
+        if(lsb > 127 )
+        {
+            lsb = 0;
+        }
+
+        myMidiMessage.setMessage(11, 0, 32, lsb);
 
         sendMessage(myMidiMessage);
     }
@@ -95,7 +117,7 @@ public class MidiReceiver  {
 
         program = program % 128;
 
-        changeBank(bank);
+        changeMSB(bank);
 
         changeProgram(program);
 

@@ -13,6 +13,6 @@
     <string name="textIntro">Herzlich Willkommen</string>
     <string name="getDeviceButton">get device</string>
     <string name="sendMessage">send Message</string>
-    <string name="sendMessageB">send Message</string>
+    <string name="sendMessageB">Programm ändern</string>
     <string name="getDevice">New ToggleButton</string>
 </resources>

@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import java.lang.reflect.Array;
-
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.MidiSystem;
 import jp.kshoji.javax.sound.midi.MidiUnavailableException;
@@ -41,24 +39,11 @@ public class MainActivity extends Activity {
 
         try {
 
-            final ToggleButton getDeviceButton = (ToggleButton) findViewById(R.id.getDeviceButton);
-
             Button sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
 
-            final EditText programNumber = (EditText) findViewById(R.id.programNumber);
+            final EditText programNumber = (EditText) findViewById(R.id.PCInput);
 
             final TextView myText = (TextView) findViewById(R.id.myText);
-
-            getDeviceButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        getMidiReceiver();
-                    } catch (MidiUnavailableException e) {
-                        myText.setText(e.getMessage());
-                    }
-                }
-            });
 
 
             sendMessageButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +70,7 @@ public class MainActivity extends Activity {
 
         ;
 
-        Button newActivity = (Button) findViewById(R.id.newActivity);
+        Button newActivity = (Button) findViewById(R.id.startLibrary);
         newActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
