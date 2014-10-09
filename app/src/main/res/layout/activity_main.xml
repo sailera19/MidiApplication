@@ -21,7 +21,8 @@
         android:background="#fffaffea"
         android:layout_below="@+id/PCText"
         android:layout_alignStart="@+id/MSBInput"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -31,10 +32,9 @@
         android:id="@+id/sendMessageButton"
         android:background="#fffaffea"
         android:hint="@string/sendMessage"
-        android:layout_toEndOf="@+id/LSBInput"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/LSBInput"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true" />
 
 
     <Button
@@ -46,9 +46,9 @@
         android:layout_toStartOf="@+id/MSBText"
         android:layout_toEndOf="@+id/MSBText"
         android:layout_alignParentBottom="false"
-        android:layout_toLeftOf="@+id/sendMessageButton"
         android:layout_below="@+id/sendMessageButton"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +96,8 @@
         android:id="@+id/MSBInput"
         android:background="#fffaffea"
         android:layout_below="@+id/MSBText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,7 +106,6 @@
         android:text="LSB"
         android:id="@+id/LSBText"
         android:layout_marginTop="30dp"
-        android:layout_alignEnd="@+id/startLibrary"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/MSBInput"
         android:textColor="#e5f1f9d5" />
@@ -118,7 +118,8 @@
         android:id="@+id/LSBInput"
         android:background="#fffaffea"
         android:layout_below="@+id/LSBText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <Button
         android:layout_width="wrap_content"
@@ -133,7 +134,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="false"
         android:layout_alignParentTop="false"
-        android:layout_toRightOf="@+id/sendMessageButton" />
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>

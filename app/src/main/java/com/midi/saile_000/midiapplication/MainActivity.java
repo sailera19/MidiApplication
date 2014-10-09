@@ -37,22 +37,54 @@ public class MainActivity extends Activity {
         MidiSystem.initialize(this);
 
 
-        try {
+        final Button sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
 
-            Button sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
+        final Button startLibrary = (Button) findViewById(R.id.startLibrary);
 
-            final EditText programNumber = (EditText) findViewById(R.id.PCInput);
+        final Button startSetList = (Button) findViewById(R.id.startSetlist);
 
-            final TextView myText = (TextView) findViewById(R.id.myText);
+        final EditText pcInput = (EditText) findViewById(R.id.PCInput);
+
+        final EditText msbInput = (EditText) findViewById(R.id.MSBInput);
+
+        final EditText lsbInput = (EditText) findViewById(R.id.LSBInput);
+
+        final TextView pcText = (TextView) findViewById(R.id.PCText);
+
+        final TextView msbText = (TextView) findViewById(R.id.MSBText);
+
+        final TextView lsbText = (TextView) findViewById(R.id.LSBText);
+
+        final TextView textViewIntro = (TextView) findViewById(R.id.textViewIntro);
 
 
-            sendMessageButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
-                        myMidiReceiver.kurzweilChangeProgram(Integer.parseInt(programNumber.getText().toString()));
-                    } catch (InvalidMidiDataException e) {
-                        myText.setText(e.getMessage());
+                        String msbOutput = msbInput.getText().toString();
+                        if (msbOutput.isEmpty())
+                            msbOutput = "-1";
+                        String lsbOutput = lsbInput.getText().toString();
+                        if (lsbOutput.isEmpty())
+                            lsbOutput = "-1";
+                        String pcOutput = pcInput.getText().toString();
+                        if (pcOutput.isEmpty())
+                            pcOutput = "-1";
+
+                        int msb = Integer.parseInt(msbOutput);
+                        int lsb = Integer.parseInt(lsbOutput);
+                        int pc = Integer.parseInt(pcOutput);
+                        getMidiReceiver().change(msb, lsb, pc);
+
+
+                    } catch (Exception e) {
+                        /**catch (InvalidMidiDataException e) {
+ } catch (MidiUnavailableException e) {
+ }**/
                     }
                 }
             });
@@ -60,15 +92,7 @@ public class MainActivity extends Activity {
 
 
 
-        }
-        catch (Exception e)
-        {
-            final TextView deviceList = (TextView) findViewById(R.id.myText);
 
-            deviceList.setText(e.getMessage());
-        }
-
-        ;
 
         Button newActivity = (Button) findViewById(R.id.startLibrary);
         newActivity.setOnClickListener(new View.OnClickListener() {
