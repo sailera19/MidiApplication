@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -79,6 +83,14 @@ public class Library extends Activity {
 
                 }
             });
+            File bla = new File(getFilesDir(), "bla.css");
+            try {
+                FileInputStream blaInput = new FileInputStream(bla);
+            } catch (FileNotFoundException e) {
+                System.out.println("ging schief");
+            }
+
+
         }
         catch (ArrayIndexOutOfBoundsException e)
         {
