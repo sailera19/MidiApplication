@@ -1,6 +1,7 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +26,11 @@ public class MainActivity extends Activity {
         }
 
         return myMidiReceiver;
+    }
+    private void midiAlert ()
+    {
+        DialogFragment dialogFragment = new MidiAlertFragment();
+        dialogFragment.show(getFragmentManager(), "midiAlert");
     }
 
 
@@ -56,9 +62,6 @@ public class MainActivity extends Activity {
         final TextView textViewIntro = (TextView) findViewById(R.id.textViewIntro);
 
 
-
-
-
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -80,20 +83,13 @@ public class MainActivity extends Activity {
 
 
                     } catch (Exception e) {
-                        /**catch (InvalidMidiDataException e) {
- } catch (MidiUnavailableException e) {
- }**/
+                        midiAlert();
                     }
                 }
             });
 
 
-
-
-
-
-        Button newActivity = (Button) findViewById(R.id.startLibrary);
-        newActivity.setOnClickListener(new View.OnClickListener() {
+        startLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Library.class);

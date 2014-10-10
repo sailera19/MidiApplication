@@ -1,6 +1,8 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,8 +25,14 @@ import jp.kshoji.javax.sound.midi.MidiSystem;
 import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 
+
 public class Library extends Activity {
     private MidiReceiver myMidiReceiver = null;
+    private List<MidiProgram> myMidiProgramList;
+    private ListView myListView;
+    private MidiProgramListAdapter myAdapter;
+    private boolean firstResume = true;
+
 
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
         if (myMidiReceiver == null)
@@ -34,6 +42,31 @@ public class Library extends Activity {
         }
 
         return myMidiReceiver;
+    }
+    public void getProgramList ()
+    {
+        try {
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open(PreferenceManager.getDefaultSharedPreferences(this).getString("programList", "pc3k.csv"))));
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                String[] row = line.split(",");
+                myMidiProgramList.add(new MidiProgram(Integer.parseInt(row[0].trim()), Integer.parseInt(row[1].trim()), Integer.parseInt(row[2].trim()), Integer.parseInt(row[3].trim()), row[4]));
+
+            }
+            myAdapter.updateDataSet(myMidiProgramList);
+            myListView.setAdapter(myAdapter);
+        } catch (IOException e) {
+
+        }
+
+    }
+
+    private void midiAlert ()
+    {
+        DialogFragment dialogFragment = new MidiAlertFragment();
+        dialogFragment.show(getFragmentManager(), "midiAlert");
     }
 
 
@@ -45,13 +78,13 @@ public class Library extends Activity {
         MidiSystem.initialize(this);
         try {
 
-            MidiProgramListAdapter myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
+            myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
 
-            final List<MidiProgram> myMidiProgramList = new LinkedList<MidiProgram>();
+            myMidiProgramList = new LinkedList<MidiProgram>();
 
             myAdapter.updateDataSet(myMidiProgramList);
 
-            ListView myListView = (ListView) findViewById(R.id.listView);
+            myListView = (ListView) findViewById(R.id.listView);
 
             myListView.setAdapter(myAdapter);
 
@@ -65,37 +98,25 @@ public class Library extends Activity {
                         TextView errorView = (TextView) findViewById(R.id.errorView);
                         errorView.setText("" + i);
                     } catch (InvalidMidiDataException e) {
-                        TextView errorView = (TextView) findViewById(R.id.errorView);
-                        errorView.setText(e.getMessage());
+                        midiAlert();
                     } catch (MidiUnavailableException e) {
-                        e.printStackTrace();
+                        midiAlert();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        midiAlert();
                     }
 
                 }
             });
-            try {
 
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open(PreferenceManager.getDefaultSharedPreferences(this).getString("programList", "pc3k.csv"))));
-                String line = "";
-                while ((line = bufferedReader.readLine()) != null)
-                {
-                    String[] row = line.split(",");
-                    myMidiProgramList.add(new MidiProgram(Integer.parseInt(row[0].trim()), Integer.parseInt(row[1].trim()), Integer.parseInt(row[2].trim()), Integer.parseInt(row[3].trim()), row[4]));
-
-                }
-                myAdapter.updateDataSet(myMidiProgramList);
-                myListView.setAdapter(myAdapter);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            getProgramList();
 
 
         }
         catch (ArrayIndexOutOfBoundsException e)
         {
-            TextView errorView = (TextView) findViewById(R.id.errorView);
-            errorView.setText(e.getMessage());
+            midiAlert();
         }
+
     }
 
 
@@ -126,5 +147,6 @@ public class Library extends Activity {
 
         MidiSystem.terminate();
     }
+
 
 }

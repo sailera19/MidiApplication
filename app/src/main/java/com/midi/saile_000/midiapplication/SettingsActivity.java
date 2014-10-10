@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 /**
  * Created by saile_000 on 10.10.2014.
  */
@@ -16,5 +19,7 @@ public class SettingsActivity extends Activity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
+
     }
+
 }

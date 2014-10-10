@@ -14,4 +14,7 @@
     <string name="sendMessage">send Message</string>
     <string name="sendMessageB">Programm ändern</string>
     <string name="getDevice">New ToggleButton</string>
+    <string name="midiAlertTitle">Midi-Fehler!</string>
+    <string name="midiAlertMessage">Bitte überprüfe die Midi-Verbindung</string>
+    <string name="close">schließen</string>
 </resources>
