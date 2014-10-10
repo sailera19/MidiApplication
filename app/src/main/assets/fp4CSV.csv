@@ -1,0 +1,224 @@
+0,68,1,1,Grand Piano1
+25,64,1,2,Piano + Str.
+16,67,1,3,Grand Piano2
+47,64,3,4,Piano + Pad
+8,66,2,5,Grand Piano3
+47,65,3,6,MagicalPiano
+8,64,3,7,Rock Piano
+26,64,1,8,Piano+Choir
+0,64,4,9,Honky-tonk
+0,66,7,10,Harpsichord
+8,66,7,11,Coupled Hps.
+0,67,5,12,Vintage EP
+16,67,5,13,Pop E.Piano
+24,65,5,14,'60s E.Piano
+0,70,6,15,FM E.Piano
+16,66,5,16,'70s E.Piano
+0,68,5,17,Stage Phaser
+0,69,3,18,E.Grand
+0,67,8,19,Clav.
+0,0,12,20,Vibraphone
+0,64,13,21,Marimba
+0,0,9,22,Celesta
+0,64,115,23,Mallet Isle
+0,68,99,24,Morning Lite
+8,68,6,25,EP Belle
+0,66,9,26,Ballad Bells
+0,70,19,27,Combo Jz.Org
+0,69,19,28,Ballad Organ
+0,71,17,29,Gospel Spin
+0,69,17,30,Full Stops
+32,68,17,31,Mellow Bars
+32,69,17,32,Light Organ
+0,66,17,33,Lower Organ
+1,64,19,34,Purple Spin
+16,64,17,35,'60s Organ
+0,66,20,36,ChurchOrgan1
+8,69,20,37,ChurchOrgan2
+16,66,20,38,Nason flt 8'
+0,68,22,39,Accordion
+0,0,25,40,Nylon-str.Gt
+0,0,26,41,Steel-str.Gt
+0,64,28,42,Clean Guitar
+0,64,27,43,Jazz Guitar
+0,66,30,44,Overdrive Gt
+0,71,33,45,AcousticBass
+0,66,33,46,A.Bass+Cymbl
+0,0,34,47,FingeredBass
+0,0,36,48,FretlessBass
+0,64,37,49,Slap Bass
+0,0,39,50,Synth Bass
+0,66,54,51,Thum Voice
+8,64,53,52,Aerial Choir
+0,65,55,53,Jazz Scat
+8,66,53,54,Female Aahs
+0,65,86,55,Angels Choir
+8,65,55,56,Beauty Vox
+8,68,53,57,Male Aahs
+0,64,100,58,Harpvox
+1,64,53,59,Decay Choir
+0,67,66,60,Alto Sax
+8,66,67,61,Tenor Sax
+0,0,62,62,BrassSection
+0,64,74,63,Flute
+0,67,69,64,ChamberWinds
+120,0,1,65,STANDARD Set
+120,0,9,66,ROOM Set
+120,0,17,67,POWER Set
+120,0,25,68,ELEC.Set
+120,0,26,69,ANALOG Set
+120,0,33,70,JAZZ Set
+120,0,41,71,BRUSH Set
+120,0,49,72,ORCH.Set
+120,0,57,73,SFX Set
+121,0,1,74,Piano 1
+121,1,1,75,Piano 1w
+121,2,1,76,Piano 1d
+121,0,2,77,Piano 2
+121,1,2,78,Piano 2w
+121,0,3,79,Piano 3
+121,1,3,80,Piano 3w
+121,0,4,81,Honky-tonk
+121,1,4,82,Honky-tonk w
+121,0,5,83,E.Piano 1
+121,1,5,84,Detuned EP 1
+121,2,5,85,Vintage EP
+121,3,5,86,'60s E.Piano
+121,0,6,87,E.Piano 2
+121,1,6,88,Detuned EP 2
+121,2,6,89,St.FM EP
+121,3,6,90,EP Legend
+121,4,6,91,EP Phase
+121,0,7,92,Harpsichord
+121,1,7,93,Coupled Hps.
+121,2,7,94,Harpsi.w
+121,3,7,95,Harpsi.o
+121,0,8,96,Clav.
+121,1,8,97,Pulse Clav.
+121,0,9,98,Celesta
+121,0,10,99,Glockenspiel
+121,0,11,100,Music Box
+121,0,12,101,Vibraphone
+121,1,12,102,Vibraphone w
+121,0,13,103,Marimba
+121,1,13,104,Marimba w
+121,0,14,105,Xylophone
+121,0,15,106,TubularBells
+121,1,15,107,Church Bell
+121,2,15,108,Carillon
+121,0,16,109,Santur
+121,0,17,110,Organ 1
+121,1,17,111,TremoloOrgan
+121,2,17,112,'60s Organ
+121,3,17,113,Organ 2
+121,0,18,114,Perc.Organ 1
+121,1,18,115,Chorus Organ
+121,2,18,116,Perc.Organ 2
+121,0,19,117,Rock Organ
+121,0,20,118,Church Org.1
+121,1,20,119,Church Org.2
+121,2,20,120,Church Org.3
+121,0,21,121,Reed Organ
+121,1,21,122,Puff Organ
+121,0,22,123,Accordion 1
+121,1,22,124,Accordion 2
+121,0,23,125,Harmonica
+121,0,24,126,Bandoneon
+121,0,25,127,Nylon-str.Gt
+121,1,25,128,Ukulele
+121,2,25,129,Nylon Gt o
+121,3,25,130,Nylon Gt 2
+121,0,26,131,Steel-str.Gt
+121,1,26,132,12-str.Gt
+121,2,26,133,Mandolin
+121,3,26,134,Steel+Body
+121,0,27,135,Jazz Guitar
+121,1,27,136,Hawaiian Gt
+121,0,28,137,Clean Guitar
+121,1,28,138,Chorus Gt 1
+121,2,28,139,Mid Tone Gt
+121,0,29,140,Muted Guitar
+121,1,29,141,Funk Guitar1
+121,2,29,142,Funk Guitar2
+121,3,29,143,Chorus Gt 2
+121,0,30,144,Overdrive Gt
+121,1,30,145,Guitar Pinch
+121,0,31,146,DistortionGt
+121,1,31,147,Gt Feedback1
+121,2,31,148,Dist.Rtm Gt
+121,0,32,149,Gt Harmonics
+121,1,32,150,Gt Feedback2
+121,0,33,151,AcousticBass
+121,0,34,152,FingeredBass
+121,1,34,153,Finger Slap
+121,0,35,154,Picked Bass
+121,0,36,155,FretlessBass
+121,0,37,156,Slap Bass 1
+121,0,38,157,Slap Bass 2
+121,0,39,158,Synth Bass 1
+121,1,39,159,WarmSyn.Bass
+121,2,39,160,Synth Bass 3
+121,3,39,161,Clav.Bass
+121,4,39,162,Hammer
+121,0,40,163,Synth Bass 2
+121,1,40,164,Synth Bass 4
+121,2,40,165,RubberSyn.Bs
+121,3,40,166,Attack Pulse
+121,0,41,167,Violin
+121,1,41,168,Slow Violin
+121,0,42,169,Viola
+121,0,43,170,Cello
+121,0,44,171,Contrabass
+121,0,45,172,Tremolo Str.
+121,0,46,173,PizzicatoStr
+121,0,47,174,Harp
+121,1,47,175,Yang Qin
+121,0,48,176,Timpani
+121,0,49,177,Strings
+121,1,49,178,Orchestra
+121,2,49,179,'60s Strings
+121,0,50,180,Slow Strings
+121,0,51,181,Syn.Strings1
+121,1,51,182,Syn.Strings3
+121,0,52,183,Syn.Strings2
+121,0,53,184,Choir 1
+121,1,53,185,Choir 2
+121,0,54,186,Voice
+121,1,54,187,Humming
+121,0,55,188,Synth Voice
+121,1,55,189,Analog Voice
+121,0,56,190,OrchestraHit
+121,1,56,191,Bass Hit
+121,2,56,192,6th Hit
+121,3,56,193,Euro Hit
+121,0,57,194,Trumpet
+121,1,57,195,Dark Trumpet
+121,0,58,196,Trombone 1
+121,1,58,197,Trombone 2
+121,2,58,198,Bright Tb
+121,0,59,199,Tuba
+121,0,60,200,MuteTrumpet1
+121,1,60,201,MuteTrumpet2
+121,0,61,202,French Horn1
+121,1,61,203,French Horn2
+121,0,62,204,Brass 1
+121,1,62,205,Brass 2
+121,0,63,206,Synth Brass1
+121,1,63,207,Synth Brass3
+121,2,63,208,AnalogBrass1
+121,3,63,209,Jump Brass
+121,0,64,210,Synth Brass2
+121,1,64,211,Synth Brass4
+121,2,64,212,AnalogBrass2
+121,0,65,213,Soprano Sax
+121,0,66,214,Alto Sax
+121,0,67,215,Tenor Sax
+121,0,68,216,Baritone Sax
+121,0,69,217,Oboe
+121,0,70,218,English Horn
+121,0,71,219,Bassoon
+121,0,72,220,Clarinet
+121,0,73,221,Piccolo
+121,0,74,222,Flute
+121,0,75,223,Recorder
+121,0,76,224,Pan Flute

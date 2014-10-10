@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="programList"
+        android:title="@string/title_programList"
+        android:entries="@array/programList_titles"
+        android:entryValues="@array/programList_values"
+        android:defaultValue="pc3k.csv"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+
+
+</PreferenceScreen>

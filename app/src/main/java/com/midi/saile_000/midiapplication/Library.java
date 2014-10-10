@@ -1,7 +1,10 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,7 +74,8 @@ public class Library extends Activity {
                 }
             });
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open("pc3k.csv")));
+
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open(PreferenceManager.getDefaultSharedPreferences(this).getString("programList", "pc3k.csv"))));
                 String line = "";
                 while ((line = bufferedReader.readLine()) != null)
                 {
@@ -109,6 +113,8 @@ public class Library extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Library.this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
