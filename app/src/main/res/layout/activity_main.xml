@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Bibliothek starten"
         android:id="@+id/startLibrary"
-        android:background="#fffaffea"
+        android:background = "@drawable/roundedbutton"
         android:layout_toStartOf="@+id/MSBText"
         android:layout_toEndOf="@+id/MSBText"
         android:layout_alignParentBottom="false"
