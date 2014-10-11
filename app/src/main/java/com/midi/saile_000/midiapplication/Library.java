@@ -1,11 +1,11 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class Library extends Activity {
     private ListView myListView;
     private MidiProgramListAdapter myAdapter;
     private boolean firstResume = true;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
 
 
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
@@ -45,9 +48,13 @@ public class Library extends Activity {
     }
     public void getProgramList ()
     {
+        if (sharedPreferences == null) return;
         try {
-
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getAssets().open(PreferenceManager.getDefaultSharedPreferences(this).getString("programList", "pc3k.csv"))));
+            String assetString = sharedPreferences.getString("programList", "pc3k.csv");
+            InputStream inputStream = getAssets().open(assetString);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            myMidiProgramList.clear();
             String line = "";
             while ((line = bufferedReader.readLine()) != null)
             {
@@ -76,6 +83,14 @@ public class Library extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
         MidiSystem.initialize(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                getProgramList();
+            }
+        };
+        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         try {
 
             myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
@@ -146,6 +161,8 @@ public class Library extends Activity {
         super.onDestroy();
 
         MidiSystem.terminate();
+
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
 
 
