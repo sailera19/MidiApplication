@@ -13,10 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,8 +21,7 @@ import jp.kshoji.javax.sound.midi.MidiSystem;
 import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 
-
-public class Library extends Activity {
+public class SetListActivity extends Activity {
     private MidiReceiver myMidiReceiver = null;
     private List<MidiProgram> myMidiProgramList;
     private ListView myListView;
@@ -47,26 +42,8 @@ public class Library extends Activity {
     }
     public void getProgramList ()
     {
-        if (sharedPreferences == null) return;
-        try {
-            String assetString = sharedPreferences.getString("programList", "pc3k.csv");
-            InputStream inputStream = getAssets().open(assetString);
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            myMidiProgramList.clear();
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                String[] row = line.split(",");
-                myMidiProgramList.add(new MidiProgram(Integer.parseInt(row[0].trim()), Integer.parseInt(row[1].trim()), Integer.parseInt(row[2].trim()), Integer.parseInt(row[3].trim()), row[4]));
-
-            }
-            myAdapter.updateDataSet(myMidiProgramList);
-            myListView.setAdapter(myAdapter);
-        } catch (IOException e) {
-
-        }
-
+        myAdapter.updateDataSet(myMidiProgramList);
+        myListView.setAdapter(myAdapter);
     }
 
     private void midiAlert ()
@@ -74,13 +51,11 @@ public class Library extends Activity {
         DialogFragment dialogFragment = new MidiAlertFragment();
         dialogFragment.show(getFragmentManager(), "midiAlert");
     }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_library);
+        setContentView(R.layout.activity_set_list);
+
         MidiSystem.initialize(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -90,15 +65,18 @@ public class Library extends Activity {
             }
         };
         sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
         try {
 
             myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
 
             myMidiProgramList = new LinkedList<MidiProgram>();
 
+            myMidiProgramList.add(new MidiProgram(0,0,0,0, "bla"));
+
             myAdapter.updateDataSet(myMidiProgramList);
 
-            myListView = (ListView) findViewById(R.id.programlistviewList);
+            myListView = (ListView) findViewById(R.id.setListView);
 
             myListView.setAdapter(myAdapter);
 
@@ -121,8 +99,18 @@ public class Library extends Activity {
 
                 }
             });
+            myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    DialogFragment dialogFragment = new SetListAlertFragment();
+                    dialogFragment.show(getFragmentManager(), "setListAlert");
+                    return true;
+                }
+            });
 
             getProgramList();
+
+
 
 
         }
@@ -137,7 +125,7 @@ public class Library extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.library, menu);
+        getMenuInflater().inflate(R.menu.set_list, menu);
         return true;
     }
 
@@ -148,12 +136,11 @@ public class Library extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(Library.this, SettingsActivity.class);
-            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onDestroy()
     {
@@ -164,5 +151,15 @@ public class Library extends Activity {
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onDestroy();
 
+        if(!CommunicationMidiProgram.isUsed())
+        {
+            myMidiProgramList.add(CommunicationMidiProgram.getMidiProgram());
+            getProgramList();
+        }
+    }
 }

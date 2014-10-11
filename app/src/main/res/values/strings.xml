@@ -17,4 +17,6 @@
     <string name="midiAlertTitle">Midi-Fehler!</string>
     <string name="midiAlertMessage">Bitte überprüfe die Midi-Verbindung</string>
     <string name="close">schließen</string>
+    <string name="title_activity_set_list">SetListActivity</string>
+
 </resources>

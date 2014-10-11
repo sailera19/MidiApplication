@@ -26,8 +26,7 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 
 
-public class Library extends Activity {
-    private MidiReceiver myMidiReceiver = null;
+public class SetListLibrary extends Activity {
     private List<MidiProgram> myMidiProgramList;
     private ListView myListView;
     private MidiProgramListAdapter myAdapter;
@@ -36,15 +35,6 @@ public class Library extends Activity {
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
 
 
-    private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
-        if (myMidiReceiver == null)
-        {
-            //Midi Receiver initialisieren
-            myMidiReceiver = new MidiReceiver();
-        }
-
-        return myMidiReceiver;
-    }
     public void getProgramList ()
     {
         if (sharedPreferences == null) return;
@@ -81,7 +71,6 @@ public class Library extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
-        MidiSystem.initialize(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -102,22 +91,13 @@ public class Library extends Activity {
 
             myListView.setAdapter(myAdapter);
 
+            myListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
             myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    myMidiProgramList.get(i);
-
-                    try {
-                        getMidiReceiver().changeProgram(myMidiProgramList.get(i));
-                        TextView errorView = (TextView) findViewById(R.id.errorView);
-                        errorView.setText("" + i);
-                    } catch (InvalidMidiDataException e) {
-                        midiAlert();
-                    } catch (MidiUnavailableException e) {
-                        midiAlert();
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        midiAlert();
-                    }
+                    CommunicationMidiProgram.setMidiProgram(myMidiProgramList.get(i));
+                    finish();
 
                 }
             });
@@ -148,7 +128,7 @@ public class Library extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(Library.this, SettingsActivity.class);
+            Intent intent = new Intent(SetListLibrary.this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
@@ -158,8 +138,6 @@ public class Library extends Activity {
     protected void onDestroy()
     {
         super.onDestroy();
-
-        MidiSystem.terminate();
 
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }

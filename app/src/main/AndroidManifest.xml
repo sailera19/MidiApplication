@@ -24,6 +24,14 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name=".SetListActivity"
+            android:label="@string/title_activity_set_list" >
+        </activity>
+        <activity
+            android:name=".SetListLibrary"
+            android:label="@string/title_activity_library" >
+        </activity>
     </application>
 
 </manifest>
