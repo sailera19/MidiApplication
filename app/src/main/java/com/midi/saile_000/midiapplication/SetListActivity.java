@@ -46,6 +46,18 @@ public class SetListActivity extends Activity {
         myListView.setAdapter(myAdapter);
     }
 
+    public void changeIndex (int i, int newI)
+    {
+        if(newI>myMidiProgramList.size())
+            newI = myMidiProgramList.size();
+        else if (newI<0)
+            newI = 0;
+        MidiProgram midiProgram = myMidiProgramList.get(i);
+        myMidiProgramList.remove(i);
+        myMidiProgramList.add(newI, midiProgram);
+        System.out.println(i + " zu " +newI);
+    }
+
     private void midiAlert ()
     {
         DialogFragment dialogFragment = new MidiAlertFragment();
@@ -103,6 +115,9 @@ public class SetListActivity extends Activity {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                     DialogFragment dialogFragment = new SetListAlertFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("index", i);
+                    dialogFragment.setArguments(bundle);
                     dialogFragment.show(getFragmentManager(), "setListAlert");
                     return true;
                 }
@@ -159,6 +174,25 @@ public class SetListActivity extends Activity {
         if(!CommunicationMidiProgram.isUsed())
         {
             myMidiProgramList.add(CommunicationMidiProgram.getMidiProgram());
+            getProgramList();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("onActivityResult");
+        if(resultCode==RESULT_OK)
+        {
+            System.out.println("RESULT_OK");
+            ParcelableMidiProgram midiProgram = data.getParcelableExtra("program");
+            int index = data.getIntExtra("index", -1);
+            if(index>=0)
+                myMidiProgramList.add(index, midiProgram);
+            else
+                myMidiProgramList.add(midiProgram);
+
             getProgramList();
         }
     }

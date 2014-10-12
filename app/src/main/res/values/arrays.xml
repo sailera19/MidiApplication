@@ -3,5 +3,6 @@
     <string-array name="setListAlertItems">
         <item>neues Programm danach</item>
         <item>Programm eins nach hinten verschieben</item>
+        <item>Programm eins nach vorne verschieben</item>
     </string-array>
 </resources>
