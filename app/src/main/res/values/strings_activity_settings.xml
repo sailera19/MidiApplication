@@ -1,6 +1,5 @@
 <resources>
-        <string name="title_activity_settings">Settings</string>
-
+    <string name="title_activity_settings">Settings</string>
     <string name="title_programList">Programmliste auswählen</string>
     <string name="summary_programList">hier wird die Programmliste für die Bibliothek ausgewählt</string>
     <string-array name="programList_titles">
@@ -11,4 +10,5 @@
         <item>pc3k.csv</item>
         <item>fp4CSV.csv</item>
     </string-array>
+    <string name="setlistFile">default</string>
 </resources>

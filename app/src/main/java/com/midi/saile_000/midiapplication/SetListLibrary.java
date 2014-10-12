@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,7 +98,7 @@ public class SetListLibrary extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = getIntent();
-                    intent.putExtra("program", new ParcelableMidiProgram (myMidiProgramList.get(i)));
+                    intent.putExtra("program", (Parcelable) new ParcelableMidiProgram (myMidiProgramList.get(i)));
                     SetListLibrary.this.setResult(RESULT_OK, intent);
                     finish();
                 }

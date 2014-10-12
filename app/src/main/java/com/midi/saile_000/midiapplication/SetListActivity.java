@@ -13,6 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,12 +30,12 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 public class SetListActivity extends Activity {
     private MidiReceiver myMidiReceiver = null;
-    final private LinkedList<MidiProgramGroup> groups = new LinkedList<MidiProgramGroup>();
+    private LinkedList<MidiProgramGroup> groups;
     private List<MidiProgram> myMidiProgramList;
     private ExpandableListView myListView;
     private ExpandableMidiProgramListAdapter myAdapter;
     private boolean firstResume = true;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences defaultSharedPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
 
 
@@ -79,41 +86,87 @@ public class SetListActivity extends Activity {
         DialogFragment dialogFragment = new MidiAlertFragment();
         dialogFragment.show(getFragmentManager(), "midiAlert");
     }
+
+    private void getGroupFromFile()
+    {
+        try {
+
+            String myFilePath = defaultSharedPreferences.getString("setlistFile", null);
+
+            if (myFilePath == null)
+            {
+                defaultSharedPreferences.edit().putString("setlistFile", getApplicationInfo().dataDir+"/sets/default").commit();
+                File myFile = new File(getApplicationInfo().dataDir+"/sets/default");
+                myFile.getParentFile().mkdirs();
+                myFile.createNewFile();
+                groups = null;
+                return;
+            }
+
+            File myFile = new File(myFilePath);
+
+            if(!myFile.exists())
+            {
+                myFile.getParentFile().mkdirs();
+                myFile.createNewFile();
+            }
+
+            FileInputStream fileInputStream = new FileInputStream(myFile);
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            groups = ((LinkedList<MidiProgramGroup>)objectInputStream.readObject());
+
+            objectInputStream.close();
+
+            fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_list);
 
         MidiSystem.initialize(this);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                getProgramList();
+                if(s.equals("setlistFile"))
+                {
+                    System.out.println("Called");
+                    getGroupFromFile();
+                    getProgramList();
+                }
             }
         };
-        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+        defaultSharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
 
         try {
 
-            groups.add(new MidiProgramGroup("asdf"));
-            myMidiProgramList = new LinkedList<MidiProgram>();
+            getGroupFromFile();
 
-            myMidiProgramList.add(new MidiProgram(0,0,0,0, "bla"));
-            groups.get(0).children.add(new MidiProgram(0,0,0,0, "bla"));
+            if (groups==null) {
+                groups = new LinkedList<MidiProgramGroup>();
+                groups.add(new MidiProgramGroup("default program"));
+                groups.get(0).children.add(new MidiProgram(0, 0, 0, 0, "bla"));
+            }
+
 
             myAdapter = new ExpandableMidiProgramListAdapter(this, groups);
 
             myListView = (ExpandableListView) findViewById(R.id.setListView);
 
             myListView.setAdapter(myAdapter);
-/**
-            for(int i = 0; i<myAdapter.getGroupCount(); i++)
-            {
-                myListView.expandGroup(i);
-            }**/
-
 
             myListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
@@ -176,8 +229,6 @@ public class SetListActivity extends Activity {
                 }
             });
 
-            getProgramList();
-
 
 
 
@@ -204,7 +255,19 @@ public class SetListActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(SetListActivity.this, SettingsActivity.class);
+            startActivity(intent);
             return true;
+        }
+        else if (id == R.id.new_setlist)
+        {
+            DialogFragment dialogFragment = new NewSetListFragment();
+            dialogFragment.show(getFragmentManager(), "newSetListAlert");
+        }
+        else if(id == R.id.change_setlist)
+        {
+            DialogFragment dialogFragment = new ChangeSetListFragment();
+            dialogFragment.show(getFragmentManager(), "changeSetListAlert");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -216,7 +279,27 @@ public class SetListActivity extends Activity {
 
         MidiSystem.terminate();
 
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
+
+        File dataDir = new File(getApplicationInfo().dataDir);
+
+
+
+        File myFile = new File(defaultSharedPreferences.getString("setlistFile", null));
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(myFile);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(groups);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        defaultSharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
 
     @Override

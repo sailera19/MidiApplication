@@ -18,5 +18,7 @@
     <string name="midiAlertMessage">Bitte überprüfe die Midi-Verbindung</string>
     <string name="close">schließen</string>
     <string name="title_activity_set_list">SetListActivity</string>
+    <string name="new_setlist">Neue Setlist</string>
+    <string name="change_setlist">Setlist wechseln</string>
 
 </resources>
