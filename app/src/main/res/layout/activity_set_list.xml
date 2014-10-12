@@ -10,7 +10,7 @@
     tools:context="com.midi.saile_000.midiapplication.SetListActivity">
 
 
-    <ListView
+    <ExpandableListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/setListView"

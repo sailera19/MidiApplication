@@ -96,9 +96,10 @@ public class SetListLibrary extends Activity {
             myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    CommunicationMidiProgram.setMidiProgram(myMidiProgramList.get(i));
+                    Intent intent = getIntent();
+                    intent.putExtra("program", new ParcelableMidiProgram (myMidiProgramList.get(i)));
+                    SetListLibrary.this.setResult(RESULT_OK, intent);
                     finish();
-
                 }
             });
 

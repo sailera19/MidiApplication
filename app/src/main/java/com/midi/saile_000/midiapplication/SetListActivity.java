@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -23,9 +23,10 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 public class SetListActivity extends Activity {
     private MidiReceiver myMidiReceiver = null;
+    final private LinkedList<MidiProgramGroup> groups = new LinkedList<MidiProgramGroup>();
     private List<MidiProgram> myMidiProgramList;
-    private ListView myListView;
-    private MidiProgramListAdapter myAdapter;
+    private ExpandableListView myListView;
+    private ExpandableMidiProgramListAdapter myAdapter;
     private boolean firstResume = true;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
@@ -42,20 +43,35 @@ public class SetListActivity extends Activity {
     }
     public void getProgramList ()
     {
-        myAdapter.updateDataSet(myMidiProgramList);
-        myListView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
     }
 
-    public void changeIndex (int i, int newI)
+    public void changeIndex (int i, int newI, int group, int newGroup)
     {
-        if(newI>myMidiProgramList.size())
-            newI = myMidiProgramList.size();
-        else if (newI<0)
+        if (newI<0)
             newI = 0;
-        MidiProgram midiProgram = myMidiProgramList.get(i);
-        myMidiProgramList.remove(i);
-        myMidiProgramList.add(newI, midiProgram);
-        System.out.println(i + " zu " +newI);
+        MidiProgram midiProgram = groups.get(group).children.get(i);
+        groups.get(group).children.remove(i);
+        if(newI <= groups.get(newGroup).children.size())
+            groups.get(newGroup).children.add(newI, midiProgram);
+    }
+
+    public void newGroup (int i, String name)
+    {
+        groups.add(i, new MidiProgramGroup(name));
+    }
+    public void renameGroup (int i, String name)
+    {
+        groups.get(i).string = name;
+    }
+    public void changeGroupPosition(int groupPosition, int newGroupPosition)
+    {
+        if (newGroupPosition<0)
+            newGroupPosition = 0;
+        MidiProgramGroup midiProgramGroup = groups.get(groupPosition);
+        groups.remove(groupPosition);
+        if(newGroupPosition <= groups.size())
+            groups.add(newGroupPosition, midiProgramGroup);
     }
 
     private void midiAlert ()
@@ -78,27 +94,32 @@ public class SetListActivity extends Activity {
         };
         sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
+
         try {
 
-            myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
-
+            groups.add(new MidiProgramGroup("asdf"));
             myMidiProgramList = new LinkedList<MidiProgram>();
 
             myMidiProgramList.add(new MidiProgram(0,0,0,0, "bla"));
+            groups.get(0).children.add(new MidiProgram(0,0,0,0, "bla"));
 
-            myAdapter.updateDataSet(myMidiProgramList);
+            myAdapter = new ExpandableMidiProgramListAdapter(this, groups);
 
-            myListView = (ListView) findViewById(R.id.setListView);
+            myListView = (ExpandableListView) findViewById(R.id.setListView);
 
             myListView.setAdapter(myAdapter);
+/**
+            for(int i = 0; i<myAdapter.getGroupCount(); i++)
+            {
+                myListView.expandGroup(i);
+            }**/
 
-            myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            myListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    myMidiProgramList.get(i);
-
+                public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i2, long l) {
                     try {
-                        getMidiReceiver().changeProgram(myMidiProgramList.get(i));
+                        getMidiReceiver().changeProgram(groups.get(i).children.get(i2));
                         TextView errorView = (TextView) findViewById(R.id.errorView);
                         errorView.setText("" + i);
                     } catch (InvalidMidiDataException e) {
@@ -108,18 +129,50 @@ public class SetListActivity extends Activity {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         midiAlert();
                     }
-
+                    return false;
                 }
             });
+
+
             myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    DialogFragment dialogFragment = new SetListAlertFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("index", i);
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(getFragmentManager(), "setListAlert");
-                    return true;
+                    if (ExpandableListView.getPackedPositionType(l) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+                        long packedPos = ((ExpandableListView) adapterView).getExpandableListPosition(i);
+
+                        int groupPosition = ExpandableListView.getPackedPositionGroup(packedPos);
+                        int childPosition = ExpandableListView.getPackedPositionChild(packedPos);
+
+                        DialogFragment dialogFragment = new SetListItemAlertFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("groupPosition", groupPosition);
+                        System.out.println("Group position:" + groupPosition);
+                        bundle.putInt("index", childPosition);
+                        System.out.println("index" + childPosition);
+                        dialogFragment.setArguments(bundle);
+                        dialogFragment.show(getFragmentManager(), "setListItemAlert");
+
+                        // You now have everything that you would as if this was an OnChildClickListener()
+                        // Add your logic here.
+
+                        // Return true as we are handling the event.
+                        return true;
+                    } else if (ExpandableListView.getPackedPositionType(l) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+                        long packedPos = ((ExpandableListView) adapterView).getExpandableListPosition(i);
+
+                        int groupPosition = ExpandableListView.getPackedPositionGroup(packedPos);
+
+                        System.out.println("Group Position: " + groupPosition);
+
+                        DialogFragment dialogFragment = new SetListGroupAlertFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("groupPosition", groupPosition);
+                        dialogFragment.setArguments(bundle);
+                        dialogFragment.show(getFragmentManager(), "setListGroupAlert");
+
+                        return true;
+                    } else return false;
+
                 }
             });
 
@@ -187,11 +240,12 @@ public class SetListActivity extends Activity {
         {
             System.out.println("RESULT_OK");
             ParcelableMidiProgram midiProgram = data.getParcelableExtra("program");
+            int groupPosition = data.getIntExtra("groupPosition", 0);
             int index = data.getIntExtra("index", -1);
             if(index>=0)
-                myMidiProgramList.add(index, midiProgram);
+                groups.get(groupPosition).children.add(index, midiProgram);
             else
-                myMidiProgramList.add(midiProgram);
+                groups.get(groupPosition).children.add(midiProgram);
 
             getProgramList();
         }

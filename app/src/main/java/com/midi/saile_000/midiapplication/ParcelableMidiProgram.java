@@ -19,6 +19,10 @@ public class ParcelableMidiProgram extends MidiProgram implements Parcelable {
         this.number = number;
         this.name = name;
     }
+    public ParcelableMidiProgram(MidiProgram midiProgram)
+    {
+        this(midiProgram.msb, midiProgram.lsb, midiProgram.program, midiProgram.number, midiProgram.name);
+    }
     private ParcelableMidiProgram (Parcel in)
     {
         this(in.readInt(), in.readInt(), in.readInt(), in.readInt(), in.readString());

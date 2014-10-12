@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="setListAlertItems">
+    <string-array name="setListItemAlertItems">
         <item>neues Programm danach</item>
         <item>Programm eins nach hinten verschieben</item>
         <item>Programm eins nach vorne verschieben</item>
+        <item>Programm löschen</item>
+    </string-array>
+    <string-array name="setListGroupAlertItems">
+        <item>neue Gruppe danach</item>
+        <item>Gruppe nach vorne verschieben</item>
+        <item>Gruppe nach hinten verschieben</item>
+        <item>Gruppe umbenennen</item>
+        <item>Programm am Ende der Gruppe einfügen</item>
     </string-array>
 </resources>
