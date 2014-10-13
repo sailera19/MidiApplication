@@ -16,7 +16,6 @@ public class SetListGroupAlertFragment extends DialogFragment {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle("bla");
         builder.setItems(R.array.setListGroupAlertItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
