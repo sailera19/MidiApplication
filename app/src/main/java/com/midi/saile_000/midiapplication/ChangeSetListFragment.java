@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import java.io.File;
+import java.util.Set;
 
 /**
  * Created by saile_000 on 12.10.2014.
@@ -46,6 +47,8 @@ public class ChangeSetListFragment extends DialogFragment {
         builder.setItems(fileNames, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                SetListActivity setListActivity = (SetListActivity) getActivity();
+                setListActivity.writeGroupsToFile();
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 sharedPreferences.edit().putString("setlistFile", filePaths[i]).commit();
             }

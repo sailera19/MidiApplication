@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -21,7 +22,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
-import java.util.List;
 
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.MidiSystem;
@@ -31,12 +31,12 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 public class SetListActivity extends Activity {
     private MidiReceiver myMidiReceiver = null;
     private LinkedList<MidiProgramGroup> groups;
-    private List<MidiProgram> myMidiProgramList;
     private ExpandableListView myListView;
     private ExpandableMidiProgramListAdapter myAdapter;
     private boolean firstResume = true;
     private SharedPreferences defaultSharedPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
+    private MidiProgramGroupIterator myIterator;
 
 
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
@@ -63,9 +63,20 @@ public class SetListActivity extends Activity {
             groups.get(newGroup).children.add(newI, midiProgram);
     }
 
+    public void deleteItem(int i, int group)
+    {
+        groups.get(group).children.remove(i);
+    }
+
+    public void deleteGroup(int group)
+    {
+        groups.remove(group);
+    }
+
     public void newGroup (int i, String name)
     {
         groups.add(i, new MidiProgramGroup(name));
+        myListView.expandGroup(i);
     }
     public void renameGroup (int i, String name)
     {
@@ -87,7 +98,7 @@ public class SetListActivity extends Activity {
         dialogFragment.show(getFragmentManager(), "midiAlert");
     }
 
-    private void getGroupFromFile()
+    public void getGroupFromFile()
     {
         try {
 
@@ -115,7 +126,14 @@ public class SetListActivity extends Activity {
 
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            groups = ((LinkedList<MidiProgramGroup>)objectInputStream.readObject());
+            LinkedList<MidiProgramGroup> newGroups = ((LinkedList<MidiProgramGroup>)objectInputStream.readObject());
+
+            if(groups==null)
+                groups = new LinkedList<MidiProgramGroup>();
+            else
+                groups.clear();
+
+            groups.addAll(newGroups);
 
             objectInputStream.close();
 
@@ -129,12 +147,35 @@ public class SetListActivity extends Activity {
         }
     }
 
+    public void writeGroupsToFile()
+    {
+        File dataDir = new File(getApplicationInfo().dataDir);
+
+        File myFile = new File(defaultSharedPreferences.getString("setlistFile", null));
+
+        String title = getTitle() + myFile.getName();
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(myFile);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(groups);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_list);
 
         MidiSystem.initialize(this);
+
 
         defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -168,6 +209,11 @@ public class SetListActivity extends Activity {
 
             myListView.setAdapter(myAdapter);
 
+            for(int i = 0; i < groups.size(); i++)
+            {
+                myListView.expandGroup(i);
+            }
+
             myListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
                 public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i2, long l) {
@@ -185,6 +231,7 @@ public class SetListActivity extends Activity {
                     return false;
                 }
             });
+
 
 
             myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -229,8 +276,34 @@ public class SetListActivity extends Activity {
                 }
             });
 
+            myIterator = new MidiProgramGroupIterator(groups);
 
+            System.out.println(myIterator.getPosition());
 
+            Button nextButton = (Button) findViewById(R.id.nextButton);
+            Button previousButton = (Button) findViewById(R.id.previousButton);
+
+            final boolean firstNextButtonClick = true;
+
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myListView.getChildAt(myIterator.getPosition()).setSelected(false);
+                    myIterator.next();
+                    System.out.println(myIterator.getPosition());
+                    myListView.getChildAt(myIterator.getPosition()).setSelected(true);
+                }
+            });
+
+            previousButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myListView.getChildAt(myIterator.getPosition()).setSelected(false);
+                    myIterator.previous();
+                    System.out.println(myIterator.getPosition());
+                    myListView.getChildAt(myIterator.getPosition()).setSelected(true);
+                }
+            });
 
         }
         catch (ArrayIndexOutOfBoundsException e)
@@ -279,25 +352,8 @@ public class SetListActivity extends Activity {
 
         MidiSystem.terminate();
 
+        writeGroupsToFile();
 
-
-        File dataDir = new File(getApplicationInfo().dataDir);
-
-
-
-        File myFile = new File(defaultSharedPreferences.getString("setlistFile", null));
-
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(myFile);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(groups);
-            objectOutputStream.close();
-            fileOutputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         defaultSharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
@@ -305,14 +361,9 @@ public class SetListActivity extends Activity {
     @Override
     protected void onResume()
     {
-        super.onDestroy();
-
-        if(!CommunicationMidiProgram.isUsed())
-        {
-            myMidiProgramList.add(CommunicationMidiProgram.getMidiProgram());
-            getProgramList();
-        }
+        super.onResume();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -325,6 +376,7 @@ public class SetListActivity extends Activity {
             ParcelableMidiProgram midiProgram = data.getParcelableExtra("program");
             int groupPosition = data.getIntExtra("groupPosition", 0);
             int index = data.getIntExtra("index", -1);
+            System.out.println("group " + groupPosition + " index " + index);
             if(index>=0)
                 groups.get(groupPosition).children.add(index, midiProgram);
             else

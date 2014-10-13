@@ -19,7 +19,8 @@ import java.io.IOException;
 public class NewSetListFragment extends DialogFragment {
     public Dialog onCreateDialog(final Bundle savedInstanceState)
     {
-
+        SetListActivity setListActivity = (SetListActivity) getActivity();
+        setListActivity.writeGroupsToFile();
         final File dataDir = new File(getActivity().getApplicationInfo().dataDir + "/sets");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);

@@ -27,17 +27,23 @@ public class SetListGroupAlertFragment extends DialogFragment {
                         setListActivity.getProgramList();
                         break;
                     case 1:
-                        setListActivity.changeGroupPosition(groupPosition, groupPosition-1);
+                        setListActivity.deleteGroup(groupPosition);
+                        setListActivity.getProgramList();
                         break;
                     case 2:
-                        setListActivity.changeGroupPosition(groupPosition, groupPosition+1);
+                        setListActivity.changeGroupPosition(groupPosition, groupPosition-1);
+                        setListActivity.getProgramList();
                         break;
                     case 3:
+                        setListActivity.changeGroupPosition(groupPosition, groupPosition+1);
+                        setListActivity.getProgramList();
+                        break;
+                    case 4:
                         DialogFragment dialogFragment = new SetListRenameGroupFragment();
                         dialogFragment.setArguments(getArguments());
                         dialogFragment.show(getFragmentManager(), "setListRenameGroupAlert");
                         break;
-                    case 4:
+                    case 5:
                         Intent intent = new Intent(setListActivity, SetListLibrary.class);
                         intent.putExtra("groupPosition", groupPosition);
                         getActivity().startActivityForResult(intent, 1);

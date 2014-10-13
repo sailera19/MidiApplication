@@ -8,6 +8,7 @@
     </string-array>
     <string-array name="setListGroupAlertItems">
         <item>neue Gruppe danach</item>
+        <item>Gruppe löschen</item>
         <item>Gruppe nach vorne verschieben</item>
         <item>Gruppe nach hinten verschieben</item>
         <item>Gruppe umbenennen</item>

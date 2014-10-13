@@ -26,7 +26,7 @@ public class SetListItemAlertFragment extends DialogFragment {
                 switch (i) {
                     case 0:
                         Intent intent = new Intent(setListActivity, SetListLibrary.class);
-                        intent.putExtra("index", index);
+                        intent.putExtra("index", index + 1);
                         intent.putExtra("group", group);
                         getActivity().startActivityForResult(intent, 1);
                         break;
@@ -38,6 +38,11 @@ public class SetListItemAlertFragment extends DialogFragment {
                         setListActivity.changeIndex(index, index-1, group, group);
                         setListActivity.getProgramList();
                         break;
+                    case 3:
+                        setListActivity.deleteItem(index, group);
+                        setListActivity.getProgramList();
+                        break;
+
 
                 } ;
 

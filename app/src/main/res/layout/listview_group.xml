@@ -5,4 +5,5 @@
     android:layout_height="wrap_content"
     android:text="New CheckedTextView"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/checkedTextView"></CheckedTextView>
+    android:id="@+id/checkedTextView"
+    ></CheckedTextView>

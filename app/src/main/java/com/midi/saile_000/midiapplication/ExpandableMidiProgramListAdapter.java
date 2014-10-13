@@ -20,6 +20,7 @@ public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter 
     private final LinkedList<MidiProgramGroup> groups;
     public LayoutInflater inflater;
     public Activity activity;
+    private boolean isFirst = true;
 
     public ExpandableMidiProgramListAdapter(Activity act, LinkedList<MidiProgramGroup> groups) {
         activity = act;
@@ -53,6 +54,10 @@ public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter 
 
         programNumber.setText(""+midiProgram.number);
 
+        if (isFirst) {
+            convertView.setSelected(true);
+            isFirst = false;
+        }
 
 
         return convertView;
@@ -101,8 +106,7 @@ public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter 
         MidiProgramGroup group = (MidiProgramGroup) getGroup(groupPosition);
         checkedTextView.setText(group.string);
         checkedTextView.setChecked(isExpanded);
-        ExpandableListView expandableListView = (ExpandableListView) parent;
-        expandableListView.expandGroup(groupPosition);
+
         return convertView;
     }
 

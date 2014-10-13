@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/programlistview"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/bkg">
 
     <TextView
         android:layout_width="wrap_content"
