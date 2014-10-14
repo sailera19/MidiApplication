@@ -1,6 +1,7 @@
 package com.midi.saile_000.midiapplication;
 
 import android.app.Activity;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter 
     @Override
     public int getChildrenCount(int groupPosition) {
         MidiProgramGroup midiProgramGroup = groups.get(groupPosition);
-        List<MidiProgram> list = midiProgramGroup.children;
+        List<ParcelableMidiProgram> list = midiProgramGroup.children;
 
         return list.size();
     }

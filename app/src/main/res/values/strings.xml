@@ -20,5 +20,6 @@
     <string name="title_activity_set_list">SetListActivity</string>
     <string name="new_setlist">Neue Setlist</string>
     <string name="change_setlist">Setlist wechseln</string>
+    <string name="delete_setlist">Setlist löschen</string>
 
 </resources>

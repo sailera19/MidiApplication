@@ -13,4 +13,8 @@
         android:title="@string/change_setlist"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/delete_setlist"
+        android:title="@+string/delete_setlist"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>

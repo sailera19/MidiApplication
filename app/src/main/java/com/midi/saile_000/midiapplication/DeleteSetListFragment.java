@@ -14,18 +14,18 @@ import java.util.Set;
 /**
  * Created by saile_000 on 12.10.2014.
  */
-public class ChangeSetListFragment extends DialogFragment {
+public class DeleteSetListFragment extends DialogFragment {
     public Dialog onCreateDialog(final Bundle savedInstanceState)
     {
 
         File dataDir = new File(getActivity().getApplicationInfo().dataDir + "/sets");
-        File[] files = dataDir.listFiles();
+        final File[] files = dataDir.listFiles();
         if (files == null)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("Zuerst neue Setlist erstellen");
             builder.setCancelable(true);
-            builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.delete_setlist, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -43,14 +43,12 @@ public class ChangeSetListFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle(R.string.change_setlist);
+        builder.setTitle(R.id.delete_setlist);
         builder.setItems(fileNames, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SetListActivity setListActivity = (SetListActivity) getActivity();
-                setListActivity.writeGroupsToFile();
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                sharedPreferences.edit().putString("setlistFile", filePaths[i]).commit();
+                files[i].delete();
             }
         });
 

@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,7 +58,7 @@ public class SetListActivity extends Activity {
     {
         if (newI<0)
             newI = 0;
-        MidiProgram midiProgram = groups.get(group).children.get(i);
+        ParcelableMidiProgram midiProgram = groups.get(group).children.get(i);
         groups.get(group).children.remove(i);
         if(newI <= groups.get(newGroup).children.size())
             groups.get(newGroup).children.add(newI, midiProgram);
@@ -186,7 +187,7 @@ public class SetListActivity extends Activity {
             if (groups==null) {
                 groups = new LinkedList<MidiProgramGroup>();
                 groups.add(new MidiProgramGroup("default program"));
-                groups.get(0).children.add(new MidiProgram(0, 0, 0, 0, "bla"));
+                groups.get(0).children.add(new ParcelableMidiProgram(0, 0, 0, 0, "default without action"));
             }
 
 
@@ -344,6 +345,12 @@ public class SetListActivity extends Activity {
             DialogFragment dialogFragment = new ChangeSetListFragment();
             dialogFragment.show(getFragmentManager(), "changeSetListAlert");
         }
+        else if(id == R.id.delete_setlist)
+        {
+            DialogFragment dialogFragment = new DeleteSetListFragment();
+            dialogFragment.show(getFragmentManager(), "deleteSetListAlert");
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -355,7 +362,6 @@ public class SetListActivity extends Activity {
         MidiSystem.terminate();
 
         writeGroupsToFile();
-
 
         defaultSharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
