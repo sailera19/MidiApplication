@@ -127,8 +127,9 @@ public class SetListLiveActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    getMidiReceiver().changeProgram(midiProgramGroupIterator.next());
+                    MidiProgram midiProgram = midiProgramGroupIterator.next();
                     setPositionTexts();
+                    getMidiReceiver().changeProgram(midiProgram);
                 } catch (InvalidMidiDataException e) {
                     midiAlert();
                 } catch (MidiUnavailableException e) {

@@ -73,6 +73,9 @@ public class SetListActivity extends Activity {
     public void deleteGroup(int group)
     {
         groups.remove(group);
+        myAdapter = new ExpandableMidiProgramListAdapter(this, groups);
+        myListView.setAdapter(myAdapter);
+        expandAll();
     }
 
     public void newGroup (int i, String name)
@@ -171,6 +174,15 @@ public class SetListActivity extends Activity {
 
     }
 
+    public void expandAll ()
+    {
+
+        for(int i = 0; i < groups.size(); i++)
+        {
+            myListView.expandGroup(i);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,10 +210,8 @@ public class SetListActivity extends Activity {
 
             myListView.setAdapter(myAdapter);
 
-            for(int i = 0; i < groups.size(); i++)
-            {
-                myListView.expandGroup(i);
-            }
+            expandAll();
+
 
             myListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
