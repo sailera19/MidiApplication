@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/programlistview"
     android:orientation="horizontal"
-    android:background="@drawable/bkg">
+    android:background="@color/blue">
 
     <TextView
         android:layout_width="wrap_content"

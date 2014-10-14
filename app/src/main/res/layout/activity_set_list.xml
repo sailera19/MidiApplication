@@ -16,7 +16,7 @@
         android:id="@+id/setListView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/nextButton"
+        android:layout_above="@+id/startlivebutton"
         android:layout_marginBottom="10dp"
         android:longClickable="true"
         android:choiceMode="singleChoice"
@@ -25,20 +25,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="next"
-        android:id="@+id/nextButton"
-        android:layout_alignEnd="@+id/setListView"
+        android:text="Live-Modus starten"
+        android:id="@+id/startlivebutton"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background = "@drawable/roundedbutton"/>
+        android:layout_alignParentRight="false"
+        android:background = "@drawable/roundedbutton"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="previous"
-        android:id="@+id/previousButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:background = "@drawable/roundedbutton"/>
 </RelativeLayout>

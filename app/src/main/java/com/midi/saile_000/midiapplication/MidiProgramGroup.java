@@ -52,4 +52,10 @@ public class MidiProgramGroup implements Serializable, Parcelable{
             return new MidiProgramGroup[size];
         }
     };
+
+    @Override
+    public String toString()
+    {
+        return string;
+    }
 }

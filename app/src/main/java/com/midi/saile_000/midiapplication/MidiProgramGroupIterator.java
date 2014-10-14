@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -23,7 +24,9 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
     }
 
     public MidiProgramGroupIterator(Parcel in) {
+        this.midiProgramGroups = new LinkedList<MidiProgramGroup>();
         in.readTypedList(midiProgramGroups, MidiProgramGroup.CREATOR);
+        currentPosition = new int[2];
         in.readIntArray(currentPosition);
     }
 
@@ -176,6 +179,31 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
         {
             return midiProgramGroups.get(currentPosition[0]).children.get(currentPosition[1]-1);
         }
+    }
+
+    public String showCurrentGroup()
+    {
+        return midiProgramGroups.get(getCurrentGroup()).string;
+    }
+
+    public int showItemIndex ()
+    {
+        int index = 1;
+        for (int i = 0; i <= currentPosition[0]; i++)
+        {
+            if (i==currentPosition[0]) {
+                for (int j = 0; j < currentPosition[1]; j++) {
+                    index++;
+                }
+            }
+            else{
+                for (int j = 0; j < midiProgramGroups.get(i).children.size(); j++)
+                {
+                    index++;
+                }
+            }
+        }
+        return index;
     }
 
     @Override

@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
@@ -31,7 +32,7 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 public class SetListActivity extends Activity {
     private MidiReceiver myMidiReceiver = null;
-    private LinkedList<MidiProgramGroup> groups;
+    private ArrayList<MidiProgramGroup> groups;
     private ExpandableListView myListView;
     private ExpandableMidiProgramListAdapter myAdapter;
     private boolean firstResume = true;
@@ -127,10 +128,10 @@ public class SetListActivity extends Activity {
 
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            LinkedList<MidiProgramGroup> newGroups = ((LinkedList<MidiProgramGroup>)objectInputStream.readObject());
+            ArrayList<MidiProgramGroup> newGroups = ((ArrayList<MidiProgramGroup>)objectInputStream.readObject());
 
             if(groups==null)
-                groups = new LinkedList<MidiProgramGroup>();
+                groups = new ArrayList<MidiProgramGroup>();
             else
                 groups.clear();
 
@@ -185,7 +186,7 @@ public class SetListActivity extends Activity {
             getGroupFromFile();
 
             if (groups==null) {
-                groups = new LinkedList<MidiProgramGroup>();
+                groups = new ArrayList<MidiProgramGroup>();
                 groups.add(new MidiProgramGroup("default program"));
                 groups.get(0).children.add(new ParcelableMidiProgram(0, 0, 0, 0, "default without action"));
             }
@@ -216,7 +217,7 @@ public class SetListActivity extends Activity {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         midiAlert();
                     }
-                    return false;
+                    return true;
                 }
             });
 
@@ -233,7 +234,7 @@ public class SetListActivity extends Activity {
 
                         DialogFragment dialogFragment = new SetListItemAlertFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putInt("groupPosition", groupPosition);
+                        bundle.putInt("group", groupPosition);
                         System.out.println("Group position:" + groupPosition);
                         bundle.putInt("index", childPosition);
                         System.out.println("index" + childPosition);
@@ -264,32 +265,14 @@ public class SetListActivity extends Activity {
                 }
             });
 
-            myIterator = new MidiProgramGroupIterator(groups);
+            Button startLiveModeButton = (Button) findViewById(R.id.startlivebutton);
 
-            System.out.println(myIterator.getPosition());
-
-            Button nextButton = (Button) findViewById(R.id.nextButton);
-            Button previousButton = (Button) findViewById(R.id.previousButton);
-
-            final boolean firstNextButtonClick = true;
-
-            nextButton.setOnClickListener(new View.OnClickListener() {
+            startLiveModeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    myListView.getChildAt(myIterator.getPosition()).setSelected(false);
-                    myIterator.next();
-                    System.out.println(myIterator.getPosition());
-                    myListView.getChildAt(myIterator.getPosition()).setSelected(true);
-                }
-            });
-
-            previousButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    myListView.getChildAt(myIterator.getPosition()).setSelected(false);
-                    myIterator.previous();
-                    System.out.println(myIterator.getPosition());
-                    myListView.getChildAt(myIterator.getPosition()).setSelected(true);
+                    Intent intent = new Intent(SetListActivity.this, SetListLiveActivity.class);
+                    intent.putExtra("iterator", new MidiProgramGroupIterator(groups));
+                    startActivity(intent);
                 }
             });
 
@@ -382,7 +365,7 @@ public class SetListActivity extends Activity {
         {
             System.out.println("RESULT_OK");
             ParcelableMidiProgram midiProgram = data.getParcelableExtra("program");
-            int groupPosition = data.getIntExtra("groupPosition", 0);
+            int groupPosition = data.getIntExtra("group", 0);
             int index = data.getIntExtra("index", -1);
             System.out.println("group " + groupPosition + " index " + index);
             if(index>=0)

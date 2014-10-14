@@ -17,7 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
@@ -94,7 +94,7 @@ public class Library extends Activity {
 
             myAdapter = new MidiProgramListAdapter(this.getApplicationContext());
 
-            myMidiProgramList = new LinkedList<MidiProgram>();
+            myMidiProgramList = new ArrayList<MidiProgram>();
 
             myAdapter.updateDataSet(myMidiProgramList);
 

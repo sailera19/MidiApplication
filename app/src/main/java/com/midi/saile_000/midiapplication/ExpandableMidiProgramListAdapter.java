@@ -18,12 +18,12 @@ import java.util.List;
  * Created by saile_000 on 12.10.2014.
  */
 public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter {
-    private final LinkedList<MidiProgramGroup> groups;
+    private final List<MidiProgramGroup> groups;
     public LayoutInflater inflater;
     public Activity activity;
     private boolean isFirst = true;
 
-    public ExpandableMidiProgramListAdapter(Activity act, LinkedList<MidiProgramGroup> groups) {
+    public ExpandableMidiProgramListAdapter(Activity act, List<MidiProgramGroup> groups) {
         activity = act;
         this.groups = groups;
         inflater = act.getLayoutInflater();
