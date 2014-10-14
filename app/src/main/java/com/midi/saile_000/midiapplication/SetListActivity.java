@@ -178,19 +178,6 @@ public class SetListActivity extends Activity {
 
 
         defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                if(s.equals("setlistFile"))
-                {
-                    System.out.println("Called");
-                    getGroupFromFile();
-                    getProgramList();
-                }
-            }
-        };
-        defaultSharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
-
 
         try {
 
@@ -304,6 +291,21 @@ public class SetListActivity extends Activity {
                     myListView.getChildAt(myIterator.getPosition()).setSelected(true);
                 }
             });
+
+            onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                    if(s.equals("setlistFile"))
+                    {
+                        System.out.println("Called");
+                        getGroupFromFile();
+                        getProgramList();
+                    }
+                }
+            };
+            defaultSharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
+
 
         }
         catch (ArrayIndexOutOfBoundsException e)
