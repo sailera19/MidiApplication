@@ -45,7 +45,7 @@ public class SetListGroupAlertFragment extends DialogFragment {
                         break;
                     case 5:
                         Intent intent = new Intent(setListActivity, SetListLibrary.class);
-                        intent.putExtra("groupPosition", groupPosition);
+                        intent.putExtra("group", groupPosition);
                         getActivity().startActivityForResult(intent, 1);
 
 
