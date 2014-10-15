@@ -106,7 +106,7 @@ public class SetListLiveActivity extends Activity {
         nextName = (TextView) findViewById(R.id.live_next_name);
 
         nextButton = (Button) findViewById(R.id.live_nextbutton);
-        previousButton = (Button) findViewById(R.id.live_nextbutton);
+        previousButton = (Button) findViewById(R.id.live_previousbutton);
 
         Intent intent = getIntent();
 
@@ -126,9 +126,10 @@ public class SetListLiveActivity extends Activity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MidiProgram midiProgram = midiProgramGroupIterator.next();
+                setPositionTexts();
                 try {
-                    MidiProgram midiProgram = midiProgramGroupIterator.next();
-                    setPositionTexts();
+
                     getMidiReceiver().changeProgram(midiProgram);
                 } catch (InvalidMidiDataException e) {
                     midiAlert();
@@ -144,9 +145,11 @@ public class SetListLiveActivity extends Activity {
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MidiProgram midiProgram = midiProgramGroupIterator.previous();
+
+                setPositionTexts();
                 try {
-                    getMidiReceiver().changeProgram(midiProgramGroupIterator.previous());
-                    setPositionTexts();
+                    getMidiReceiver().changeProgram(midiProgram);
                 } catch (InvalidMidiDataException e) {
                     midiAlert();
                 } catch (MidiUnavailableException e) {

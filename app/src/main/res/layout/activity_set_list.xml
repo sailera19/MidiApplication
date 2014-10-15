@@ -14,13 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/setListView"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/startlivebutton"
         android:layout_marginBottom="10dp"
         android:longClickable="true"
         android:choiceMode="singleChoice"
-        />
+        android:layout_below="@+id/setlistname" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,5 +31,15 @@
         android:layout_alignParentRight="false"
         android:background = "@drawable/roundedbutton"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="default"
+        android:id="@+id/setlistname"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

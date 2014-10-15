@@ -87,7 +87,7 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
     @Override
     public ParcelableMidiProgram next() {
         if(!hasNext())
-            return midiProgramGroups.get(currentPosition[0]).children.get(currentPosition[1]);
+            return null;
 
         if(currentPosition[1] < midiProgramGroups.get(currentPosition[0]).children.size() -1) {
             currentPosition[1] = currentPosition[1] + 1;

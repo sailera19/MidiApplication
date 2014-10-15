@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -286,6 +288,8 @@ public class SetListActivity extends Activity {
                 }
             });
 
+            final TextView setListName = (TextView) findViewById(R.id.setlistname);
+
             onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
                 @Override
                 public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -294,6 +298,9 @@ public class SetListActivity extends Activity {
                         System.out.println("Called");
                         getGroupFromFile();
                         getProgramList();
+                        String setlistFile = sharedPreferences.getString("setlistFile", "default");
+                        setlistFile = setlistFile.substring(setlistFile.lastIndexOf('/')+1);
+                        setListName.setText(setlistFile);
                     }
                 }
             };
