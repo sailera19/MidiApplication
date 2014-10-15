@@ -40,7 +40,7 @@ public class NewSetListFragment extends DialogFragment {
                 String editTextString = editText.getText().toString();
                 if (editTextString.isEmpty())
                     editTextString = "default";
-                File newFile = new File(dataDir, editText.getText().toString());
+                File newFile = new File(dataDir, editTextString);
                 if(!newFile.exists())
                 {
                     newFile.getParentFile().mkdirs();

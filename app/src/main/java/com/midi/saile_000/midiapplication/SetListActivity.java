@@ -149,8 +149,10 @@ public class SetListActivity extends Activity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            groups = null;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            groups = null;
         }
     }
 

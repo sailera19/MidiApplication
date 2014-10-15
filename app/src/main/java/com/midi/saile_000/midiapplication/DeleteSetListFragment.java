@@ -48,6 +48,17 @@ public class DeleteSetListFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SetListActivity setListActivity = (SetListActivity) getActivity();
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(setListActivity);
+                String currentFile = sharedPreferences.getString("setlistFile", null);
+                if(fileNames[i] == currentFile || currentFile == null)
+                {
+                    if (fileNames.length > 0 || i != 0)
+                        sharedPreferences.edit().putString("setlistFile", filePaths[0]).commit();
+                    else if (fileNames.length > 0 || i == 0)
+                        sharedPreferences.edit().putString("setlistFile", filePaths[1]).commit();
+                    else
+                        sharedPreferences.edit().putString("setlistFile", "default").commit();
+                }
                 files[i].delete();
             }
         });
