@@ -24,5 +24,7 @@
     <string name="title_activity_set_list_live">Live-Modus</string>
     <string name="previous">zurück</string>
     <string name="next">weiter</string>
+    <string name="create">erstellen</string>
+    <string name="renamegroup">Gruppe umbenennen</string>
 
 </resources>

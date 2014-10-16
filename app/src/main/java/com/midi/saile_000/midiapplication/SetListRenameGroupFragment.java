@@ -17,7 +17,7 @@ public class SetListRenameGroupFragment extends DialogFragment {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle("bla");
+        builder.setTitle(R.string.renamegroup);
         final EditText userInput = new EditText(getActivity());
         builder.setView(userInput);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {

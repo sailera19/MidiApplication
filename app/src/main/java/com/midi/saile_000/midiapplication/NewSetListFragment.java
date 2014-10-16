@@ -24,17 +24,17 @@ public class NewSetListFragment extends DialogFragment {
         final File dataDir = new File(getActivity().getApplicationInfo().dataDir + "/sets");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle("bla");
+        builder.setTitle(R.id.delete_setlist);
         final EditText editText = new EditText(getActivity());
         builder.setView(editText);
         builder.setCancelable(true);
-        builder.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
-        builder.setPositiveButton("Erstellen", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String editTextString = editText.getText().toString();
