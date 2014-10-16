@@ -192,8 +192,6 @@ public class SetListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_list);
 
-        MidiSystem.initialize(this);
-
 
         defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -222,8 +220,6 @@ public class SetListActivity extends Activity {
                 public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i2, long l) {
                     try {
                         getMidiReceiver().changeProgram(groups.get(i).children.get(i2));
-                        TextView errorView = (TextView) findViewById(R.id.errorView);
-                        errorView.setText("" + i);
                     } catch (InvalidMidiDataException e) {
                         midiAlert();
                     } catch (MidiUnavailableException e) {

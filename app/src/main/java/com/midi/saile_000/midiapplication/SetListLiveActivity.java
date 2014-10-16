@@ -96,6 +96,7 @@ public class SetListLiveActivity extends Activity {
 
         MidiSystem.initialize(this);
 
+
         previousNumber = (TextView) findViewById(R.id.live_previous_number);
         previousName = (TextView) findViewById(R.id.live_previous_name);
 
@@ -130,7 +131,7 @@ public class SetListLiveActivity extends Activity {
                 setPositionTexts();
                 try {
 
-                    getMidiReceiver().changeProgram(midiProgram);
+                    getMidiReceiver().change(midiProgram.msb, midiProgram.lsb, midiProgram.program);
                 } catch (InvalidMidiDataException e) {
                     midiAlert();
                 } catch (MidiUnavailableException e) {
@@ -190,17 +191,5 @@ public class SetListLiveActivity extends Activity {
         super.onDestroy();
         MidiSystem.terminate();
     }
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        MidiSystem.initialize(this);
-    }
 
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        MidiSystem.terminate();
-    }
 }

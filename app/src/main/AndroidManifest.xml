@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.midi.saile_000.midiapplication" >
-
+    <uses-feature android:name="android.hardware.usb.host" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -9,7 +9,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +19,13 @@
         </activity>
         <activity
             android:name=".Library"
-            android:label="@string/title_activity_library" >
+            android:label="@string/title_activity_library"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".SetListActivity"
@@ -30,11 +33,13 @@
         </activity>
         <activity
             android:name=".SetListLibrary"
-            android:label="@string/title_activity_library" >
+            android:label="@string/title_activity_library"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".SetListLiveActivity"
-            android:label="@string/title_activity_set_list_live" >
+            android:label="@string/title_activity_set_list_live"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 

@@ -16,6 +16,7 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 
 public class MainActivity extends Activity {
 
+
     private MidiReceiver myMidiReceiver = null;
 
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
@@ -38,7 +39,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MidiSystem.initialize(this);
 
 
         final Button sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
@@ -79,10 +79,12 @@ public class MainActivity extends Activity {
                         int msb = Integer.parseInt(msbOutput);
                         int lsb = Integer.parseInt(lsbOutput);
                         int pc = Integer.parseInt(pcOutput);
+                        System.out.println(msb + " " + lsb + " " + pc);
                         getMidiReceiver().change(msb, lsb, pc);
 
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         midiAlert();
                     }
                 }
@@ -155,7 +157,6 @@ public class MainActivity extends Activity {
     protected void onPause()
     {
         super.onPause();
-        MidiSystem.terminate();
     }
 
 }

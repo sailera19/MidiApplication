@@ -80,8 +80,12 @@ public class Library extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_library);
+
         MidiSystem.initialize(this);
+
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -168,14 +172,12 @@ public class Library extends Activity {
     protected void onResume()
     {
         super.onResume();
-        MidiSystem.initialize(this);
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-        MidiSystem.terminate();
     }
 
 }
