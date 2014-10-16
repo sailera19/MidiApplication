@@ -109,13 +109,6 @@ public class MainActivity extends Activity {
 
 
     }
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        MidiSystem.terminate();
-    }
 
 
     @Override
@@ -125,6 +118,7 @@ public class MainActivity extends Activity {
 
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -138,6 +132,30 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        MidiSystem.terminate();
+    }
+
+
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        MidiSystem.initialize(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MidiSystem.terminate();
     }
 
 }

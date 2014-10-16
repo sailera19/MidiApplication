@@ -164,5 +164,18 @@ public class Library extends Activity {
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        MidiSystem.initialize(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MidiSystem.terminate();
+    }
 
 }

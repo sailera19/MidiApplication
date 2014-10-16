@@ -372,6 +372,14 @@ public class SetListActivity extends Activity {
     protected void onResume()
     {
         super.onResume();
+        MidiSystem.initialize(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MidiSystem.terminate();
     }
 
 

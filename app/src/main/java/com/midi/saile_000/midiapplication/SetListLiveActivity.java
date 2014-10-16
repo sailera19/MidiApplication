@@ -190,4 +190,17 @@ public class SetListLiveActivity extends Activity {
         super.onDestroy();
         MidiSystem.terminate();
     }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        MidiSystem.initialize(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MidiSystem.terminate();
+    }
 }
