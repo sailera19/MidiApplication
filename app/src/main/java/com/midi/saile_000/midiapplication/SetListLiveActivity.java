@@ -37,6 +37,8 @@ public class SetListLiveActivity extends Activity {
 
     MidiProgramGroupIterator  midiProgramGroupIterator;
 
+    private boolean firstUsage = true;
+
 
     private MidiReceiver getMidiReceiver() throws MidiUnavailableException {
         if (myMidiReceiver == null)
@@ -113,22 +115,31 @@ public class SetListLiveActivity extends Activity {
 
         midiProgramGroupIterator = intent.getParcelableExtra("iterator");
 
-        setPositionTexts();
-        try {
-            getMidiReceiver().changeProgram(midiProgramGroupIterator.showCurrent());
-        } catch (InvalidMidiDataException e) {
-            midiAlert();
-        } catch (MidiUnavailableException e) {
-            midiAlert();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            midiAlert();
-        }
+        previousNumber.setText("0");
+        previousName.setText("----");
+
+
+        currentNumber.setText("0");
+        currentName.setText("----");
+
+        nextNumber.setText("" + midiProgramGroupIterator.getCurrentIndex());
+        nextName.setText(midiProgramGroupIterator.showCurrent().name);
+
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MidiProgram midiProgram = midiProgramGroupIterator.next();
-                setPositionTexts();
+                MidiProgram midiProgram;
+                if(firstUsage) {
+                    firstUsage = false;
+                    setPositionTexts();
+                    midiProgram = midiProgramGroupIterator.showCurrent();
+                }
+                else {
+                    midiProgram = midiProgramGroupIterator.next();
+                    if (midiProgram == null) return;
+                    setPositionTexts();
+                }
                 try {
 
                     getMidiReceiver().change(midiProgram.msb, midiProgram.lsb, midiProgram.program);
@@ -147,6 +158,8 @@ public class SetListLiveActivity extends Activity {
             @Override
             public void onClick(View view) {
                 MidiProgram midiProgram = midiProgramGroupIterator.previous();
+
+                if(midiProgram==null) return;
 
                 setPositionTexts();
                 try {
@@ -186,7 +199,7 @@ public class SetListLiveActivity extends Activity {
     }
 
     @Override
-    public void onDestroy()
+    protected void onDestroy()
     {
         super.onDestroy();
         MidiSystem.terminate();

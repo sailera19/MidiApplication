@@ -36,7 +36,7 @@ public class ExpandableMidiProgramListAdapter extends BaseExpandableListAdapter 
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override

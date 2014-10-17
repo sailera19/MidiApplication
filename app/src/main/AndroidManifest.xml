@@ -24,17 +24,16 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:launchMode="singleTask">
+            android:label="@string/title_activity_settings">
         </activity>
         <activity
             android:name=".SetListActivity"
-            android:label="@string/title_activity_set_list" >
+            android:label="@string/title_activity_set_list"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".SetListLibrary"
-            android:label="@string/title_activity_library"
-            android:launchMode="singleTask">
+            android:label="@string/title_activity_library">
         </activity>
         <activity
             android:name=".SetListLiveActivity"

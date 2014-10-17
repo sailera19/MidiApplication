@@ -24,7 +24,7 @@ public class NewSetListFragment extends DialogFragment {
         final File dataDir = new File(getActivity().getApplicationInfo().dataDir + "/sets");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle(R.string.delete_setlist);
+        builder.setTitle(R.string.new_setlist);
         final EditText editText = new EditText(getActivity());
         builder.setView(editText);
         builder.setCancelable(true);

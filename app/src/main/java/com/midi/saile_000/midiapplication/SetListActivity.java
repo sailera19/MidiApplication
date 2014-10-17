@@ -127,24 +127,34 @@ public class SetListActivity extends Activity {
             {
                 myFile.getParentFile().mkdirs();
                 myFile.createNewFile();
-            }
-
-            FileInputStream fileInputStream = new FileInputStream(myFile);
-
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-
-            ArrayList<MidiProgramGroup> newGroups = ((ArrayList<MidiProgramGroup>)objectInputStream.readObject());
-
-            if(groups==null)
                 groups = new ArrayList<MidiProgramGroup>();
-            else
-                groups.clear();
+                groups.add(new MidiProgramGroup("default program"));
+                groups.get(0).children.add(new ParcelableMidiProgram(-1, -1, -1, 0, "default without action"));
+                return;
+            }
+            else {
+                FileInputStream fileInputStream = new FileInputStream(myFile);
 
-            groups.addAll(newGroups);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            objectInputStream.close();
+                ArrayList<MidiProgramGroup> newGroups = ((ArrayList<MidiProgramGroup>) objectInputStream.readObject());
 
-            fileInputStream.close();
+                if(newGroups == null) {
+                    groups = null;
+                    return;
+                }
+
+                if (groups == null)
+                    groups = new ArrayList<MidiProgramGroup>();
+                else
+                    groups.clear();
+
+                groups.addAll(newGroups);
+
+                objectInputStream.close();
+
+                fileInputStream.close();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -202,7 +212,7 @@ public class SetListActivity extends Activity {
             if (groups==null) {
                 groups = new ArrayList<MidiProgramGroup>();
                 groups.add(new MidiProgramGroup("default program"));
-                groups.get(0).children.add(new ParcelableMidiProgram(0, 0, 0, 0, "default without action"));
+                groups.get(0).children.add(new ParcelableMidiProgram(-1, -1, -1, 0, "default without action"));
             }
 
 

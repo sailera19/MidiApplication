@@ -69,7 +69,7 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
 
     @Override
     public boolean hasNext() {
-        if(currentPosition[1]+ 1 < (midiProgramGroups.get(currentPosition[0]).children.size() - 1)|| (currentPosition[0]+1 < midiProgramGroups.size())&&(midiProgramGroups.get(currentPosition[0]+1).children.size() > 0))
+        if(currentPosition[1] + 1 < midiProgramGroups.get(currentPosition[0]).children.size()|| (currentPosition[0]+1 < midiProgramGroups.size())&&(midiProgramGroups.get(currentPosition[0]+1).children.size() > 0))
           return true;
         else
             return false;
@@ -89,7 +89,7 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
         if(!hasNext())
             return null;
 
-        if(currentPosition[1] < midiProgramGroups.get(currentPosition[0]).children.size() -1) {
+        if(currentPosition[1] + 1 < midiProgramGroups.get(currentPosition[0]).children.size()) {
             currentPosition[1] = currentPosition[1] + 1;
             return midiProgramGroups.get(currentPosition[0]).children.get(currentPosition[1]);
         }
@@ -148,7 +148,9 @@ public class MidiProgramGroupIterator implements ListIterator<ParcelableMidiProg
 
     public MidiProgram showCurrent()
     {
-        return midiProgramGroups.get(getCurrentGroup()).children.get(getCurrentIndex());
+        MidiProgramGroup midiProgramGroup = midiProgramGroups.get(getCurrentGroup());
+
+        return midiProgramGroup.children.get(getCurrentIndex());
     }
 
     public MidiProgram showNext()

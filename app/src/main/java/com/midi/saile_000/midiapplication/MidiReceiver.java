@@ -107,7 +107,7 @@ public class MidiReceiver  {
             lsb = 0;
         }
 
-        myMidiMessage.setMessage(11, 0, 32, lsb);
+        myMidiMessage.setMessage(ShortMessage.CONTROL_CHANGE, 0, 32, lsb);
 
         sendMessage(myMidiMessage);
     }
