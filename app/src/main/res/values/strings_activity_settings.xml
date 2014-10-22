@@ -5,10 +5,12 @@
     <string-array name="programList_titles">
         <item>Kurzweil PC3K</item>
         <item>Roland FP-4</item>
+        <item>GM Sounds</item>
     </string-array>
     <string-array name="programList_values">
         <item>pc3k.csv</item>
         <item>fp4CSV.csv</item>
+        <item>gm.csv</item>
     </string-array>
     <string name="setlistFile">default</string>
 </resources>

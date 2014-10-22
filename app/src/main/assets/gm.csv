@@ -1,0 +1,127 @@
+0,0,0,1,Acoustic Grand Piano
+0,0,1,2,Bright Acoustic Piano
+0,0,2,3,Electric Grand Piano
+0,0,3,4,Honky-tonk Piano
+0,0,4,5,Electric Piano 1
+0,0,5,6,Electric Piano 2
+0,0,6,7,Harpsichord
+0,0,7,8,Clavi
+0,0,8,9,Celesta
+0,0,9,10,Glockenspiel
+0,0,10,11,Music Box
+0,0,11,12,Vibraphone
+0,0,12,13,Marimba
+0,0,13,14,Xylophone
+0,0,14,15,Tubular Bells
+0,0,15,16,Dulcimer
+0,0,16,17,Drawbar Organ
+0,0,17,18,Percussive Organ
+0,0,18,19,Rock Organ
+0,0,19,20,Church Organ
+0,0,20,21,Reed Organ
+0,0,21,22,Accordion
+0,0,22,23,Harmonica
+0,0,23,24,Tango Accordion
+0,0,24,25,Acoustic Guitar (nylon)
+0,0,25,26,Acoustic Guitar (steel)
+0,0,26,27,Electric Guitar (jazz)
+0,0,27,28,Electric Guitar (clean)
+0,0,28,29,Electric Guitar (muted)
+0,0,29,30,Overdriven Guitar
+0,0,30,31,Distortion Guitar
+0,0,31,32,Guitar harmonics
+0,0,32,33,Acoustic Bass
+0,0,33,34,Electric Bass (finger)
+0,0,34,35,Electric Bass (pick)
+0,0,35,36,Fretless Bass
+0,0,36,37,Slap Bass 1
+0,0,37,38,Slap Bass 2
+0,0,38,39,Synth Bass 1
+0,0,39,40,Synth Bass 2
+0,0,40,41,Violin
+0,0,41,42,Viola
+0,0,42,43,Cello
+0,0,43,44,Contrabass
+0,0,44,45,Tremolo Strings
+0,0,45,46,Pizzicato Strings
+0,0,46,47,Orchestral Harp
+0,0,47,48,Timpani
+0,0,48,49,String Ensemble 1
+0,0,49,50,String Ensemble 2
+0,0,50,51,Synth Strings 1
+0,0,51,52,Synth Strings 2
+0,0,52,53,Voice Aahs
+0,0,53,54,Voice Oohs
+0,0,54,55,Synth Voice
+0,0,55,56,Orchestra Hit
+0,0,56,57,Trumpet
+0,0,57,58,Trombone
+0,0,58,59,Tuba
+0,0,59,60,Muted Trumpet
+0,0,60,61,French Horn
+0,0,61,62,Brass Section
+0,0,62,63,Synth Brass 1
+0,0,63,64,Synth Brass 2
+0,0,64,65,Soprano Sax
+0,0,65,66,Alto Sax
+0,0,66,67,Tenor Sax
+0,0,67,68,Baritone Sax
+0,0,68,69,Oboe
+0,0,69,70,English Horn
+0,0,70,71,Bassoon
+0,0,71,72,Clarinet
+0,0,72,73,Piccolo
+0,0,73,74,Flute
+0,0,74,75,Recorder
+0,0,75,76,Pan Flute
+0,0,76,77,Blown Bottle
+0,0,77,78,Shakuhachi
+0,0,78,79,Whistle
+0,0,79,80,Ocarina
+0,0,80,81,Lead 1 (square)
+0,0,81,82,Lead 2 (sawtooth)
+0,0,82,83,Lead 3 (calliope)
+0,0,83,84,Lead 4 (chiff)
+0,0,84,85,Lead 5 (charang)
+0,0,85,86,Lead 6 (voice)
+0,0,86,87,Lead 7 (fifths)
+0,0,87,88,Lead 8 (bass + lead)
+0,0,88,89,Pad 1 (new age)
+0,0,89,90,Pad 2 (warm)
+0,0,90,91,Pad 3 (polysynth)
+0,0,91,92,Pad 4 (choir)
+0,0,92,93,Pad 5 (bowed)
+0,0,93,94,Pad 6 (metallic)
+0,0,94,95,Pad 7 (halo)
+0,0,95,96,Pad 8 (sweep)
+0,0,96,97,FX 1 (rain)
+0,0,97,98,FX 2 (soundtrack)
+0,0,98,99,FX 3 (crystal)
+0,0,99,100,FX 4 (atmosphere)
+0,0,100,101,FX 5 (brightness)
+0,0,101,102,FX 6 (goblins)
+0,0,102,103,FX 7 (echoes)
+0,0,103,104,FX 8 (sci-fi)
+0,0,104,105,Sitar
+0,0,105,106,Banjo
+0,0,106,107,Shamisen
+0,0,107,108,Koto
+0,0,108,109,Kalimba
+0,0,109,110,Bagpipe
+0,0,110,111,Fiddle
+0,0,111,112,Shanai
+0,0,112,113,Tinkle Bell
+0,0,113,114,Agogo Bells
+0,0,114,115,Steel Drums
+0,0,115,116,Woodblock
+0,0,116,117,Taiko Drum
+0,0,117,118,Melodic Tom
+0,0,118,119,Synth Drum
+0,0,119,120,Reverse Cymbal
+0,0,120,121,Guitar Fret Noise
+0,0,121,122,Breath Noise
+0,0,122,123,Seashore
+0,0,123,124,Bird Tweet
+0,0,124,125,Telephone Ring
+0,0,125,126,Helicopter
+0,0,126,127,Applause
